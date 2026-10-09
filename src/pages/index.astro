@@ -843,7 +843,7 @@ const faqs = [
   <section class="section section--mist">
     <h2 class="accent">POZNAJ KLARĘ</h2>
     <br>
-    <p class="hero-sub">
+    <p class="hero-sub-white">
       <b>Pianistka, nauczycielka i doradca finansowy. Łączę trzy światy: muzykę, edukację i finanse.</b> I właśnie to połączenie jest moją siłą. <br><br>
       Od blisko <b>9 lat uczę gry na fortepianie. </b> Jestem absolwentką Akademii Muzycznej w Gdańsku, laureatką konkursów pianistycznych w Polsce i za granicą oraz uczestniczką <b>kilkudziesięciu kursów i warsztatów mistrzowskich.</b> Mam również bogate doświadczenie sceniczne – występowałam m.in. w Narodowym Forum Muzyki we Wrocławiu, Filharmonii Bałtyckiej, Radiu Gdańsk, na Zamku Królewskim w Warszawie i w Żelazowej Woli. <br><br>
       Przez kilka lat byłam <b>przewodniczącą Międzywydziałowego Koła Muzyki Kameralnej</b> Akademii Muzycznej w Gdańsku, aktywnie angażując się w życie artystyczne i edukacyjne uczelni. <br><br>
@@ -1302,7 +1302,7 @@ Zapisz się. Zacznij
   .cta-small {
     font-family: var(--font-mono);
     font-size: 0.8rem;
-    color: var(--black);
+    color: var(--white);
     background: var(--baby-blue);
     padding: 0.55rem 0.95rem;
     border-radius: 3px;
@@ -1373,6 +1373,15 @@ Zapisz się. Zacznij
     font-size: clamp(1rem, 1.6vw, 1.15rem);
     line-height: 1.55;
     color: var(--ink-soft);
+  }
+
+  .hero-sub-white {
+    max-width: 46ch;
+    margin: 0.5rem auto 0;
+    text-align: center;
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    line-height: 1.55;
+    color: var(--ink-light);
   }
 
   .hero-actions {
@@ -1464,7 +1473,7 @@ Zapisz się. Zacznij
 
   .section--mist {
     background: var(--mist);
-    color: var(--ink);
+    color: var(--ink-light);
   }
 
   .section h2 {
@@ -1474,7 +1483,7 @@ Zapisz się. Zacznij
   }
 
   .section h2.accent {
-    color: var(--baby-blue-deep);
+    color: var(--ink-light);
   }
 
   .section-sub {
@@ -1532,7 +1541,7 @@ Zapisz się. Zacznij
   .principle p {
     font-size: 0.95rem;
     line-height: 1.6;
-    color: var(--ink-soft);
+    color: var(--ink-light);
   }
 
   @media (max-width: 780px) {
