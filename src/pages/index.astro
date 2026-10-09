@@ -48,10 +48,10 @@ const plans = [
 
 // FIX 2: Speech options for the inquiry modal. `name` MUST match the data-package values on the Speech buttons.
 const speechPackages = [
-  { name: "Claire Speech - Pierwsza lekcja", length: "60 min", price: "99 zł" },
-  { name: "Claire Speech Kids", length: "4 zajęcia", price: "440 zł / mies." },
-  { name: "Claire Speech Teens", length: "4 zajęcia", price: "480 zł / mies." },
-  { name: "Claire Speech Adult", length: "4 zajęcia", price: "520 zł / mies." },
+  { name: "Pierwsza lekcja", length: "60 min", price: "99 zł" },
+  { name: "Kids", length: "4 zajęcia", price: "440 zł / mies." },
+  { name: "Teens", length: "4 zajęcia", price: "480 zł / mies." },
+  { name: "Adult", length: "4 zajęcia", price: "520 zł / mies." },
 ];
 
 const practies = [
@@ -151,7 +151,7 @@ const faqs = [
         Kameralne studio pianina w Gdańsku dla osób, które chcą znaleźć nową pasję, rozwijać się i spędzać czas w dobrym towarzystwie.
       </p>
       <div class="hero-actions">
-        <a class="cta-primary" href="#pricing">UMÓW PIERWSZE ZAJĘCIA</a>
+        <a class="cta-primary" href="#piano-speech-tiles">UMÓW PIERWSZE ZAJĘCIA</a>
       </div>
       <p class="meta-line">Grunwaldzka 212/2, Gdańsk</p>
     </section>
@@ -209,7 +209,7 @@ const faqs = [
   document.addEventListener('astro:page-load', initToggle);
 </script>
 
-<section class="section section--white">
+<section id="piano-speech-tiles" class="section section--white">
 <div class="toggle-blocks-container">
   
   <!-- Kafelek Piano - domyślnie aktywny (active i disabled) -->
@@ -311,7 +311,7 @@ const faqs = [
       </div>
 
         <p class="offer-note">
-          Oferta na start dotyczy Twoich pierwszych zajęć — ważna do <strong>15 września 2026</strong>.
+          Oferta na start dotyczy Twoich pierwszych zajęć — ważna do <strong>30 października 2026</strong>.
         </p>
     </section>
     </section>
@@ -960,11 +960,12 @@ const faqs = [
         <img src="/claire_atelier_kolo_jednolity_sifonn.png" alt="Claire Atelier logo" />
       </div>
       <h2>Może właśnie znalazłeś swoją nową pasję?</h2>
-      <p class="band-sub">
-       Zadzwoń. Zapisz się. Zacznij.
-      </p>
+      <!-- <p class="band-sub"> -->
+      <!--  Zadzwoń. Zapisz się. Zacznij. -->
+      <!-- </p> -->
       <a class="cta-dark" href="mailto:jachimczak.klara@gmail.com">
-        jachimczak.klara@gmail.com
+Zapisz się. Zacznij
+        <!-- jachimczak.klara@gmail.com -->
       </a>
     </section>
 
@@ -1094,7 +1095,7 @@ const faqs = [
         </p>
 
         <fieldset class="inquiry-field inquiry-radios">
-          <legend>Zajęcia</legend>
+          <legend>CLAIRE PIANO</legend>
           {plans.map((plan) => (
             <label class="inquiry-radio">
               <input type="radio" name="package" value={plan.name} required />
@@ -1104,7 +1105,7 @@ const faqs = [
         </fieldset>
 
         <fieldset class="inquiry-field inquiry-radios">
-          <legend>Practice</legend>
+          <!-- <legend>Practice</legend> -->
           {practies.map((plan) => (
             <label class="inquiry-radio">
               <input type="radio" name="package" value={plan.name} required />
