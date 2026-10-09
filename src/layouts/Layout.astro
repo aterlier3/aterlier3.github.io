@@ -1,0 +1,102 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Claire Atelier",
+  description = "Tu nie tylko uczysz się grać. Tu rozwijasz siebie i tworzysz relacje. Kameralne studio pianina w Gdańsku dla osób, które chcą znaleźć nową pasję, rozwijać się i spędzać czas w dobrym towarzystwie.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/claire_atelier_kolo_jednolity_sifonn.png" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.cdnfonts.com/css/sifonn" rel="stylesheet">
+    <!-- <link -->
+    <!--   href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" -->
+    <!--   rel="stylesheet" -->
+    <!-- /> -->
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    /* Color tokens — keyboard: white keys, black keys, one blue note */
+    --black: #14171a;
+    --black-soft: #23262b;
+    --white: #ffffff;
+    --mist: #f4fafd;
+    /* pale blue-white for section backgrounds, keeps "white" family */
+    --baby-blue: #9fd8ed;
+    --baby-blue-deep: #57add1;
+    --ink: #1c1f22;
+    --ink-soft: #4c5257;
+
+    --font-display: "Sifonn", "Iowan Old Style", serif;
+    --font-body: "Work Sans", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    * {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    margin: 0;
+    background: var(--white);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    margin: 0;
+    line-height: 1.05;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--baby-blue-deep);
+    outline-offset: 3px;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+</style>
