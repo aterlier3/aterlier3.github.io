@@ -19,6 +19,116 @@ const principles = [
   },
 ];
 
+const speechDlaKogo = [
+  {
+    title: "DLA DZIECI",
+    body: `Mniej nieśmiałości. Więcej swobody.
+
+           Dziecko uczy się mówić wyraźnie, spokojnie i odważnie.
+
+           Z czasem łatwiej:
+
+           odpowiada przed klasą,
+
+           prezentuje przygotowany materiał,
+
+           opowiada historię,
+
+           mówi do grupy,
+
+           zabiera głos,
+
+           radzi sobie z tremą.
+
+           Nie chodzi o to, żeby dziecko mówiło „idealnie”.
+           Chodzi o to, żeby nie bało się własnego głosu.
+
+           EFEKT?
+           Dziecko mówi wyraźniej, lepiej kontroluje głos i coraz swobodniej występuje przed innymi.`
+  },
+  {
+    title: "DLA NASTOLATKÓW",
+    body: `Znajdź swój głos. Dosłownie.
+
+           Okres dorastania to moment, kiedy szczególnie mocno zaczynamy oceniać siebie.
+
+           „Jak brzmi mój głos?”
+
+           „Czy mówię dziwnie?”
+
+           „Co pomyślą inni?”
+
+           „Czy dobrze wypadnę?”
+
+           Claire Speech pomaga przełamać ten schemat.
+
+           Nastolatek uczy się:
+
+           mówić wyraźnie i naturalnie,
+
+           prezentować bez paraliżującego stresu,
+
+           ciekawie opowiadać,
+
+           mówić do mikrofonu i kamery,
+
+           budować wypowiedź,
+
+           świadomie korzystać z głosu,
+
+           mówić własnym stylem.
+
+           EFEKT?
+           Więcej swobody w szkole, podczas wystąpień, nagrań i codziennych rozmów.
+
+           I większa pewność siebie, która zostaje na dłużej`,
+  },
+  {
+    title: "DLA NASTOLATKÓW",
+    body: `Twój głos jest częścią Twojego wizerunku.
+
+           Podczas spotkania.
+
+           Prezentacji.
+
+           Rozmowy rekrutacyjnej.
+
+           Nagrania.
+
+           Rozmowy z klientem.
+
+           Wystąpienia.
+
+           Rozmowy z własnym dzieckiem.
+
+           To, jak mówisz, często decyduje o tym, jak zostaniesz odebrany.
+
+           Claire Speech pomaga, jeśli:
+
+           mówisz zbyt szybko,
+
+           brzmisz monotonnie,
+
+           masz problem z wyraźną wymową,
+
+           stresujesz się wystąpieniami,
+
+           nie lubisz swojego głosu na nagraniach,
+
+           trudno Ci mówić naturalnie do kamery,
+
+           chcesz brzmieć bardziej profesjonalnie,
+
+           masz wiedzę i doświadczenie, ale trudno Ci je dobrze przekazać.
+
+           EFEKT?
+           Głos staje się bardziej świadomy, wyraźny i pewny.
+
+           A Twoje wypowiedzi zaczynają brzmieć tak dobrze, jak to, co masz do powiedzenia.
+`
+  },
+];
+
 const plans = [
   {
     name: "SOLO",
@@ -32,6 +142,7 @@ const plans = [
     name: "DUO",
     length: "60 min",
     price: "89 zł / osoba",
+    oldPrice: "140 zł",
     detail: "Nowa pasja, którą możesz dzielić z kimś bliskim. Przyjdź z drugą połówką, przyjacielem, kimś z rodziny czy znajomym.",
     highlight: false,
   },
@@ -116,8 +227,16 @@ const faqs = [
     </a>
     <nav aria-label="Primary">
       <!-- <a href="#pillars">Filary</a> -->
-      <a href="#pricing">Oferta na start</a>
+      <a href="#piano">Piano</a>
+      <a href="#speech">Speech</a>
       <a href="#practice">Practice</a>
+      <!--
+       TODO: add section with vouchers I
+Voucher na 1 i 4 lekcji pianina wybiera solo, duo lub grupa
+Voucher na zajęcia grupowe lub indywidualne speech
+additionally, add logic to send a voucher via email.
+      -->
+      <a href="#voucher">Kup voucher</a>
       <a href="#faq">FAQ</a>
       <a href="#location">Znajdź nas</a>
     </nav>
@@ -278,15 +397,22 @@ const faqs = [
           </div>
         ))}
       </div>
+
+
+ <!-- -->
+        <p class="offer-note">
+          Oferta na start dotyczy Twoich pierwszych zajęć — ważna do <strong>30 października 2026</strong>.
+        </p>
     <!-- </section> -->
 
+<!-- zmień kolor na lekki czerwo-->
     <section id="practice" class="section-piano-practice section">
       <h2>CLAIRE PRACTICE</h2>
 
       <p class="section-sub">
-        <b>Nie masz pianina w domu? To nie problem.</b>
-        <br /><br />
-        Twoja pasja nie musi kończyć się wraz z zajęciami.
+        <b>Nie masz pianina w domu? To nie problem.</b><br>
+        <br />
+        Wykup pakiet i ćwicz u nas.
       </p>
 
 
@@ -310,9 +436,6 @@ const faqs = [
         ))}
       </div>
 
-        <p class="offer-note">
-          Oferta na start dotyczy Twoich pierwszych zajęć — ważna do <strong>30 października 2026</strong>.
-        </p>
     </section>
     </section>
   </section> <!-- FIX 1: end of #section-piano. The stray empty <section id="section-speech"> that used to be here is removed (duplicate id made querySelector find the empty one). -->
@@ -387,144 +510,17 @@ const faqs = [
     </p>
   </section>
 
-
-  <!-- DLA DZIECI -->
-  <section id="speech-kids" class="section section--white">
-    <h2>DLA DZIECI</h2>
-
-    <p class="section-sub">
-      <strong>Mniej nieśmiałości. Więcej swobody.</strong>
-    </p>
-
-    <p class="section-sub">
-      Dziecko uczy się mówić wyraźnie, spokojnie i odważnie.
-    </p>
-
-    <p class="section-sub">
-      Z czasem łatwiej:
-    </p>
-
-    <div class="speech-list">
-      <p>odpowiada przed klasą,</p>
-      <p>prezentuje przygotowany materiał,</p>
-      <p>opowiada historię,</p>
-      <p>mówi do grupy,</p>
-      <p>zabiera głos,</p>
-      <p>radzi sobie z tremą.</p>
-    </div>
-
-    <p class="section-sub">
-      Nie chodzi o to, żeby dziecko mówiło „idealnie”.<br />
-      Chodzi o to, żeby nie bało się własnego głosu.
-    </p>
-
-    <h3>EFEKT?</h3>
-
-    <p class="section-sub">
-      Dziecko mówi wyraźniej, lepiej kontroluje głos
-      i coraz swobodniej występuje przed innymi.
-    </p>
-  </section>
-
-
-  <!-- DLA NASTOLATKÓW -->
-  <section id="speech-teens" class="section section--mist">
-    <h2>DLA NASTOLATKÓW</h2>
-
-    <p class="section-sub">
-      <strong>Znajdź swój głos. Dosłownie.</strong>
-    </p>
-
-    <p class="section-sub">
-      Okres dorastania to moment, kiedy szczególnie mocno zaczynamy
-      oceniać siebie.
-    </p>
-
-    <div class="speech-quotes">
-      <p>„Jak brzmi mój głos?”</p>
-      <p>„Czy mówię dziwnie?”</p>
-      <p>„Co pomyślą inni?”</p>
-      <p>„Czy dobrze wypadnę?”</p>
-    </div>
-
-    <p class="section-sub">
-      Claire Speech pomaga przełamać ten schemat.
-    </p>
-
-    <p class="section-sub">
-      Nastolatek uczy się:
-    </p>
-
-    <div class="speech-list">
-      <p>mówić wyraźnie i naturalnie,</p>
-      <p>prezentować bez paraliżującego stresu,</p>
-      <p>ciekawie opowiadać,</p>
-      <p>mówić do mikrofonu i kamery,</p>
-      <p>budować wypowiedź,</p>
-      <p>świadomie korzystać z głosu,</p>
-      <p>mówić własnym stylem.</p>
-    </div>
-
-    <h3>EFEKT?</h3>
-
-    <p class="section-sub">
-      Więcej swobody w szkole, podczas wystąpień, nagrań
-      i codziennych rozmów.
-      <br /><br />
-      I większa pewność siebie, która zostaje na dłużej.
-    </p>
-  </section>
-
-
-  <!-- DLA DOROSŁYCH -->
-  <section id="speech-adults" class="section section--white">
-    <h2>DLA DOROSŁYCH</h2>
-
-    <p class="section-sub">
-      <strong>Twój głos jest częścią Twojego wizerunku.</strong>
-    </p>
-
-    <div class="speech-list">
-      <p>Podczas spotkania.</p>
-      <p>Prezentacji.</p>
-      <p>Rozmowy rekrutacyjnej.</p>
-      <p>Nagrania.</p>
-      <p>Rozmowy z klientem.</p>
-      <p>Wystąpienia.</p>
-      <p>Rozmowy z własnym dzieckiem.</p>
-    </div>
-
-    <p class="section-sub">
-      To, jak mówisz, często decyduje o tym, jak zostaniesz odebrany.
-    </p>
-
-    <p class="section-sub">
-      Claire Speech pomaga, jeśli:
-    </p>
-
-    <div class="speech-list">
-      <p>mówisz zbyt szybko,</p>
-      <p>brzmisz monotonnie,</p>
-      <p>masz problem z wyraźną wymową,</p>
-      <p>stresujesz się wystąpieniami,</p>
-      <p>nie lubisz swojego głosu na nagraniach,</p>
-      <p>trudno Ci mówić naturalnie do kamery,</p>
-      <p>chcesz brzmieć bardziej profesjonalnie,</p>
-      <p>
-        masz wiedzę i doświadczenie, ale trudno Ci je dobrze przekazać.
-      </p>
-    </div>
-
-    <h3>EFEKT?</h3>
-
-    <p class="section-sub">
-      Głos staje się bardziej świadomy, wyraźny i pewny.
-      <br /><br />
-      A Twoje wypowiedzi zaczynają brzmieć tak dobrze,
-      jak to, co masz do powiedzenia.
-    </p>
-  </section>
-
+<!-- apply formatting + white background black font + h2 -->
+    <section id="dla-kogo-speech" class="section section--mist">
+      <div class="principles">
+        {speechDlaKogo.map((p) => (
+          <div class="principle">
+            <h2>{p.title}</h2>
+            <p>{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
 
   <!-- USŁYSZYSZ SWÓJ PROGRES -->
   <section id="speech-progress" class="section section--mist">
@@ -1095,6 +1091,7 @@ Zapisz się. Zacznij
         </p>
 
         <fieldset class="inquiry-field inquiry-radios">
+          <!-- TODO: make legend look like bold/ ~h3, and label be softer and smaller font -->
           <legend>CLAIRE PIANO</legend>
           {plans.map((plan) => (
             <label class="inquiry-radio">
@@ -1105,7 +1102,7 @@ Zapisz się. Zacznij
         </fieldset>
 
         <fieldset class="inquiry-field inquiry-radios">
-          <!-- <legend>Practice</legend> -->
+          <legend>Practice</legend>
           {practies.map((plan) => (
             <label class="inquiry-radio">
               <input type="radio" name="package" value={plan.name} required />
@@ -2278,7 +2275,7 @@ Zapisz się. Zacznij
 /* ---------- CLAIRE SPEECH ---------- */
 /* FIX 10: these classes were used in the markup but had no styles */
 .speech-list,
-.speech-quotes {
+.speech-quotes {/
   max-width: 50ch;
   margin: 1.5rem auto 0;
   display: flex;
@@ -2292,7 +2289,7 @@ Zapisz się. Zacznij
 
 .speech-quotes p {
   font-style: italic;
-  color: var(--baby-blue-deep);
+  color: var(--ink-light);
 }
 
 .speech-program-details {
