@@ -19,113 +19,78 @@ const principles = [
   },
 ];
 
+// Body is HTML, rendered with set:html in the template.
 const speechDlaKogo = [
   {
     title: "DLA DZIECI",
-    body: `Mniej nieśmiałości. Więcej swobody.
-
-           Dziecko uczy się mówić wyraźnie, spokojnie i odważnie.
-
-           Z czasem łatwiej:
-
-           odpowiada przed klasą,
-
-           prezentuje przygotowany materiał,
-
-           opowiada historię,
-
-           mówi do grupy,
-
-           zabiera głos,
-
-           radzi sobie z tremą.
-
-           Nie chodzi o to, żeby dziecko mówiło „idealnie”.
-           Chodzi o to, żeby nie bało się własnego głosu.
-
-           EFEKT?
-           Dziecko mówi wyraźniej, lepiej kontroluje głos i coraz swobodniej występuje przed innymi.`
+    body: `
+      <p class="lead">Mniej nieśmiałości. Więcej swobody.</p>
+      <p>Dziecko uczy się mówić wyraźnie, spokojnie i odważnie.</p>
+      <p>Z czasem łatwiej:</p>
+      <ul>
+        <li>odpowiada przed klasą,</li>
+        <li>prezentuje przygotowany materiał,</li>
+        <li>opowiada historię,</li>
+        <li>mówi do grupy,</li>
+        <li>zabiera głos,</li>
+        <li>radzi sobie z tremą.</li>
+      </ul>
+      <p>Nie chodzi o to, żeby dziecko mówiło „idealnie”.<br />Chodzi o to, żeby nie bało się własnego głosu.</p>
+      <p class="effect"><strong>EFEKT?</strong><br />Dziecko mówi wyraźniej, lepiej kontroluje głos i coraz swobodniej występuje przed innymi.</p>`,
   },
   {
     title: "DLA NASTOLATKÓW",
-    body: `Znajdź swój głos. Dosłownie.
-
-           Okres dorastania to moment, kiedy szczególnie mocno zaczynamy oceniać siebie.
-
-           „Jak brzmi mój głos?”
-
-           „Czy mówię dziwnie?”
-
-           „Co pomyślą inni?”
-
-           „Czy dobrze wypadnę?”
-
-           Claire Speech pomaga przełamać ten schemat.
-
-           Nastolatek uczy się:
-
-           mówić wyraźnie i naturalnie,
-
-           prezentować bez paraliżującego stresu,
-
-           ciekawie opowiadać,
-
-           mówić do mikrofonu i kamery,
-
-           budować wypowiedź,
-
-           świadomie korzystać z głosu,
-
-           mówić własnym stylem.
-
-           EFEKT?
-           Więcej swobody w szkole, podczas wystąpień, nagrań i codziennych rozmów.
-
-           I większa pewność siebie, która zostaje na dłużej`,
+    body: `
+      <p class="lead">Znajdź swój głos. Dosłownie.</p>
+      <p>Okres dorastania to moment, kiedy szczególnie mocno zaczynamy oceniać siebie.</p>
+      <ul class="quotes">
+        <li>„Jak brzmi mój głos?”</li>
+        <li>„Czy mówię dziwnie?”</li>
+        <li>„Co pomyślą inni?”</li>
+        <li>„Czy dobrze wypadnę?”</li>
+      </ul>
+      <p>Claire Speech pomaga przełamać ten schemat.</p>
+      <p>Nastolatek uczy się:</p>
+      <ul>
+        <li>mówić wyraźnie i naturalnie,</li>
+        <li>prezentować bez paraliżującego stresu,</li>
+        <li>ciekawie opowiadać,</li>
+        <li>mówić do mikrofonu i kamery,</li>
+        <li>budować wypowiedź,</li>
+        <li>świadomie korzystać z głosu,</li>
+        <li>mówić własnym stylem.</li>
+      </ul>
+      <p class="effect"><strong>EFEKT?</strong><br />Więcej swobody w szkole, podczas wystąpień, nagrań i codziennych rozmów.</p>
+      <p>I większa pewność siebie, która zostaje na dłużej.</p>`,
   },
   {
-    title: "DLA NASTOLATKÓW",
-    body: `Twój głos jest częścią Twojego wizerunku.
-
-           Podczas spotkania.
-
-           Prezentacji.
-
-           Rozmowy rekrutacyjnej.
-
-           Nagrania.
-
-           Rozmowy z klientem.
-
-           Wystąpienia.
-
-           Rozmowy z własnym dzieckiem.
-
-           To, jak mówisz, często decyduje o tym, jak zostaniesz odebrany.
-
-           Claire Speech pomaga, jeśli:
-
-           mówisz zbyt szybko,
-
-           brzmisz monotonnie,
-
-           masz problem z wyraźną wymową,
-
-           stresujesz się wystąpieniami,
-
-           nie lubisz swojego głosu na nagraniach,
-
-           trudno Ci mówić naturalnie do kamery,
-
-           chcesz brzmieć bardziej profesjonalnie,
-
-           masz wiedzę i doświadczenie, ale trudno Ci je dobrze przekazać.
-
-           EFEKT?
-           Głos staje się bardziej świadomy, wyraźny i pewny.
-
-           A Twoje wypowiedzi zaczynają brzmieć tak dobrze, jak to, co masz do powiedzenia.
-`
+    title: "DLA DOROSŁYCH",
+    body: `
+      <p class="lead">Twój głos jest częścią Twojego wizerunku.</p>
+      <p>Podczas:</p>
+      <ul>
+        <li>spotkania,</li>
+        <li>prezentacji,</li>
+        <li>rozmowy rekrutacyjnej,</li>
+        <li>nagrania,</li>
+        <li>rozmowy z klientem,</li>
+        <li>wystąpienia,</li>
+        <li>rozmowy z własnym dzieckiem.</li>
+      </ul>
+      <p>To, jak mówisz, często decyduje o tym, jak zostaniesz odebrany.</p>
+      <p>Claire Speech pomaga, jeśli:</p>
+      <ul>
+        <li>mówisz zbyt szybko,</li>
+        <li>brzmisz monotonnie,</li>
+        <li>masz problem z wyraźną wymową,</li>
+        <li>stresujesz się wystąpieniami,</li>
+        <li>nie lubisz swojego głosu na nagraniach,</li>
+        <li>trudno Ci mówić naturalnie do kamery,</li>
+        <li>chcesz brzmieć bardziej profesjonalnie,</li>
+        <li>masz wiedzę i doświadczenie, ale trudno Ci je dobrze przekazać.</li>
+      </ul>
+      <p class="effect"><strong>EFEKT?</strong><br />Głos staje się bardziej świadomy, wyraźny i pewny.</p>
+      <p>A Twoje wypowiedzi zaczynają brzmieć tak dobrze, jak to, co masz do powiedzenia.</p>`,
   },
 ];
 
@@ -155,9 +120,7 @@ const plans = [
   },
 ];
 
-// FIX 5 (cleanup): removed unused `clairePianoSpeech` array (it was never referenced in the template).
-
-// FIX 2: Speech options for the inquiry modal. `name` MUST match the data-package values on the Speech buttons.
+// Speech options for the inquiry modal. `name` MUST match the data-package values on the Speech buttons.
 const speechPackages = [
   { name: "Pierwsza lekcja", length: "60 min", price: "99 zł" },
   { name: "Kids", length: "4 zajęcia", price: "440 zł / mies." },
@@ -183,6 +146,28 @@ const practies = [
     highlight: false,
   },
 ];
+
+// Vouchers: two tiles, each unfolds a panel with options.
+const vouchers = [
+  {
+    id: "piano",
+    title: "VOUCHER PIANO",
+    sub: "Lekcje pianina w prezencie",
+    panelTitle: "Wybierz liczbę lekcji i formę zajęć",
+    groups: [
+      { label: "1 lekcja", options: ["Solo", "Duo", "Grupa"] },
+      { label: "4 lekcje", options: ["Solo", "Duo", "Grupa"] },
+    ],
+  },
+  {
+    id: "speech",
+    title: "VOUCHER SPEECH",
+    sub: "Zajęcia Claire Speech w prezencie",
+    panelTitle: "Wybierz rodzaj zajęć",
+    groups: [{ label: "Zajęcia", options: ["Grupowe", "Indywidualne"] }],
+  },
+];
+
 // Replace with your real address — the embed and the directions link both read from this.
 const address = "aleja Grunwaldzka 212/2 Gdańsk";
 const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
@@ -219,28 +204,22 @@ const faqs = [
 <Layout>
   <header class="nav">
     <a class="wordmark" href="#top">
-      <!-- <span class="key-mark" aria-hidden="true"></span> -->
       <div class="main-logo">
         <img src="/claire_atelier_kolo_jednolity_sifonn.png" alt="Claire Atelier logo" />
       </div>
       Claire Atelier
     </a>
     <nav aria-label="Primary">
-      <!-- <a href="#pillars">Filary</a> -->
+    <!-- TODO: add three lines icon with menu so it's visible on mobile -->
       <a href="#piano">Piano</a>
       <a href="#speech">Speech</a>
       <a href="#practice">Practice</a>
-      <!--
-       TODO: add section with vouchers I
-Voucher na 1 i 4 lekcji pianina wybiera solo, duo lub grupa
-Voucher na zajęcia grupowe lub indywidualne speech
-additionally, add logic to send a voucher via email.
-      -->
       <a href="#voucher">Kup voucher</a>
       <a href="#faq">FAQ</a>
       <a href="#location">Znajdź nas</a>
+      <a href="#location">Dla firm</a>
     </nav>
-    <a class="cta-small" 
+    <a class="cta-small"
       data-open-inquiry
     >Umów się na lekcję</a>
   </header>
@@ -248,18 +227,8 @@ additionally, add logic to send a voucher via email.
   <main id="top">
     <!-- HERO -->
     <section class="hero">
-      <!-- <div class="main-logo"> -->
-      <!--   <img src/claire_atelier_kolo_jednolity_sifonn.png" alt="Claire Atelier logo" /> -->
-      <!-- </div> -->
       <p class="eyebrow">Muzyka · Rozwój · Relacje</p>
 
-
-<!-- <span className="text-rotate text-7xl"> --> 
-<!--   <span className="justify-items-center"> -->
-<!--     <span>Claire Atelier</span> -->
-<!--     <span><em>Piano Studio</em></span> -->
-<!--   </span> -->
-<!-- </span> -->
       <h1>
         Claire Atelier<br />
         <em>Piano Studio</em>
@@ -330,21 +299,19 @@ additionally, add logic to send a voucher via email.
 
 <section id="piano-speech-tiles" class="section section--white">
 <div class="toggle-blocks-container">
-  
+
   <!-- Kafelek Piano - domyślnie aktywny (active i disabled) -->
-  <button 
+  <button
     type="button"
     class="toggle-block active"
     disabled
     data-target="#section-piano"
   >
     <h2>CLAIRE PIANO</h2>
-    <!-- <h2>DODAJ TEKST</h2>  -->
-    <!-- <p>Ty, pianino i pełna uwaga prowadzącego. Indywidualne tempo, program dopasowany do Ciebie i przestrzeń na własny rozwój.</p>  -->
   </button>
 
   <!-- Kafelek Speech -->
-  <button 
+  <button
     type="button"
     class="toggle-block"
     data-target="#section-speech"
@@ -359,13 +326,6 @@ additionally, add logic to send a voucher via email.
 
   <!-- PIANO -->
   <section id="section-piano" class="content-section">
-
-    <!-- <section id="pricing-piano" class="section section--mist"> -->
-      <!-- <h2>ŚCIEŻKI ROZWOJU - PIANO</h2> -->
-      <!---->
-      <!-- <div class="plans"> -->
-      <!--   {/* Piano content */} -->
-      <!-- </div> -->
 
     <section id="pricing" class="section section--white">
       <h2>OFERTA NA START</h2>
@@ -399,13 +359,11 @@ additionally, add logic to send a voucher via email.
       </div>
 
 
- <!-- -->
+<!-- TODO: add space after this -->
         <p class="offer-note">
           Oferta na start dotyczy Twoich pierwszych zajęć — ważna do <strong>30 października 2026</strong>.
-        </p>
-    <!-- </section> -->
+        </p><br><br>
 
-<!-- zmień kolor na lekki czerwo-->
     <section id="practice" class="section-piano-practice section">
       <h2>CLAIRE PRACTICE</h2>
 
@@ -438,10 +396,9 @@ additionally, add logic to send a voucher via email.
 
     </section>
     </section>
-  </section> <!-- FIX 1: end of #section-piano. The stray empty <section id="section-speech"> that used to be here is removed (duplicate id made querySelector find the empty one). -->
+  </section> <!-- end of #section-piano -->
 
   <!-- CLAIRE SPEECH -->
-  <!-- FIX 1: single #section-speech, now with class "hidden" so Piano is the default view -->
   <section id="section-speech" class="content-section hidden">
 
   <!-- HERO / INTRO -->
@@ -474,11 +431,10 @@ additionally, add logic to send a voucher via email.
       type="button"
       class="cta-primary"
       data-open-inquiry
-      data-package="Claire Speech - Pierwsza lekcja"
+      data-package="Pierwsza lekcja"
     >
       ZAPISZ SIĘ
     </button>
-    <!-- FIX 3: data-package was "Claire Speech" (no matching radio) -> now matches speechPackages -->
   </section>
 
 
@@ -510,17 +466,17 @@ additionally, add logic to send a voucher via email.
     </p>
   </section>
 
-<!-- apply formatting + white background black font + h2 -->
-    <section id="dla-kogo-speech" class="section section--mist">
-      <div class="principles">
-        {speechDlaKogo.map((p) => (
-          <div class="principle">
-            <h2>{p.title}</h2>
-            <p>{p.body}</p>
-          </div>
-        ))}
-      </div>
-    </section>
+  <!-- DLA KOGO -->
+  <section id="dla-kogo-speech" class="section section--white">
+    <div class="principles">
+      {speechDlaKogo.map((p) => (
+        <div class="principle">
+          <h2>{p.title}</h2>
+          <div class="speech-body" set:html={p.body} />
+        </div>
+      ))}
+    </div>
+  </section>
 
   <!-- USŁYSZYSZ SWÓJ PROGRES -->
   <section id="speech-progress" class="section section--mist">
@@ -675,7 +631,7 @@ additionally, add logic to send a voucher via email.
       <p>Pracujemy nad tekstami.</p>
       <p>Dostajemy feedback.</p>
       <p>Sprawdzamy, co się zmienia.</p>
-      <p>Poznajemy strukturę głosu i jego higienę.</p> <!-- FIX 7: kept the correct "strukturę" (your pasted text had the typo "strokutrę") -->
+      <p>Poznajemy strukturę głosu i jego higienę.</p>
     </div>
 
     <p class="section-sub">
@@ -720,7 +676,7 @@ additionally, add logic to send a voucher via email.
       type="button"
       class="cta-primary"
       data-open-inquiry
-      data-package="Claire Speech - Pierwsza lekcja"
+      data-package="Pierwsza lekcja"
     >
       ZAPISZ SIĘ
     </button>
@@ -745,7 +701,7 @@ additionally, add logic to send a voucher via email.
           type="button"
           class="cta-ghost"
           data-open-inquiry
-          data-package="Claire Speech Kids"
+          data-package="Kids"
         >
           ZAPISZ SIĘ
         </button>
@@ -759,7 +715,7 @@ additionally, add logic to send a voucher via email.
           type="button"
           class="cta-primary"
           data-open-inquiry
-          data-package="Claire Speech Teens"
+          data-package="Teens"
         >
           ZAPISZ SIĘ
         </button>
@@ -773,7 +729,7 @@ additionally, add logic to send a voucher via email.
           type="button"
           class="cta-ghost"
           data-open-inquiry
-          data-package="Claire Speech Adult"
+          data-package="Adult"
         >
           ZAPISZ SIĘ
         </button>
@@ -804,17 +760,15 @@ additionally, add logic to send a voucher via email.
       type="button"
       class="cta-primary"
       data-open-inquiry
-      data-package="Claire Speech - Pierwsza lekcja"
+      data-package="Pierwsza lekcja"
     >
       DOŁĄCZ DO CLAIRE SPEECH
     </button>
-    <!-- FIX 3: data-package was "Claire Speech" (no matching radio) -> now matches speechPackages -->
   </section>
   </section> <!-- end #section-speech -->
 </div>
 </section>
 
-    <!-- FIX 4: duplicate id="pricing" (it appears earlier in the Piano section) renamed to "more" so anchors/nav don't jump to the wrong place -->
   <section id="more" class="section section--white more-section">
     <h2>TU DZIEJE SIĘ COŚ WIĘCEJ</h2>
     <section class="about">
@@ -848,6 +802,167 @@ additionally, add logic to send a voucher via email.
       <b>Wierzę, że świat bez muzyki byłby zdecydowanie uboższy, a życie bez pasji i finansowego spokoju – zdecydowanie trudniejsze.</b> <br> Warto inwestować w to, co naprawdę ma dla nas znaczenie. <br>
     </p>
   </section>
+
+    <!-- VOUCHERS -->
+    <section id="voucher" class="section section--mist">
+      <h2>KUP VOUCHER</h2>
+      <p class="section-sub">Podaruj muzykę albo pewny głos. Wybierz rodzaj vouchera.</p>
+
+      <div class="voucher-tiles">
+        {vouchers.map((v) => (
+          <button
+            type="button"
+            class="voucher-tile"
+            data-voucher-tile={v.id}
+            aria-expanded="false"
+            aria-controls={`voucher-panel-${v.id}`}
+          >
+            <h3>{v.title}</h3>
+            <p>{v.sub}</p>
+          </button>
+        ))}
+      </div>
+
+      {vouchers.map((v) => (
+        <div class="voucher-panel" id={`voucher-panel-${v.id}`} hidden>
+          <p class="voucher-panel-title">{v.panelTitle}</p>
+          {v.groups.map((g) => (
+            <div class="voucher-group">
+              <span class="voucher-group-label">{g.label}</span>
+              <div class="voucher-options">
+                {g.options.map((o) => (
+                  <button
+                    type="button"
+                    class="cta-ghost"
+                    data-open-voucher
+                    data-voucher={`${v.title} — ${g.label} — ${o}`}
+                  >
+                    {o}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </section>
+
+    <!-- VOUCHER MODAL -->
+    <dialog id="voucher-dialog" class="inquiry-dialog">
+      <form id="voucher-form" class="inquiry-form">
+        <button type="button" class="inquiry-close" aria-label="Zamknij" data-close-voucher>&times;</button>
+        <h3>Zamów voucher</h3>
+        <p class="inquiry-sub" id="voucher-chosen"></p>
+        <input type="hidden" name="voucher" />
+
+        <label class="inquiry-field">
+          Imię i nazwisko kupującego
+          <input type="text" name="buyerName" required autocomplete="name" />
+        </label>
+
+        <label class="inquiry-field">
+          Twój e-mail
+          <input type="email" name="buyerEmail" required autocomplete="email" />
+        </label>
+
+        <label class="inquiry-field">
+          Imię obdarowanego
+          <input type="text" name="recipientName" required />
+        </label>
+
+        <label class="inquiry-field">
+          E-mail obdarowanego
+          <input type="email" name="recipientEmail" />
+        </label>
+
+        <label class="inquiry-field">
+          Dedykacja (opcjonalnie)
+          <textarea name="message" rows="3"></textarea>
+        </label>
+
+        <label class="inquiry-consent">
+          <input type="checkbox" name="rodoConsent" required />
+          <span>
+            Wyrażam zgodę na przetwarzanie moich danych osobowych w celu realizacji zamówienia,
+            zgodnie z <a href="#rodo" data-open-rodo>Polityką Prywatności (RODO)</a>.*
+          </span>
+        </label>
+
+        <button type="submit" class="cta-primary inquiry-submit">Wyślij zamówienie</button>
+      </form>
+    </dialog>
+
+    <script>
+      // tiles -> unfold panels
+      const voucherTiles = document.querySelectorAll("[data-voucher-tile]");
+      const voucherPanels = document.querySelectorAll(".voucher-panel") as NodeListOf<HTMLElement>;
+
+      voucherTiles.forEach((tile) => {
+        tile.addEventListener("click", () => {
+          const id = tile.getAttribute("data-voucher-tile");
+          const panel = document.getElementById(`voucher-panel-${id}`);
+          if (!panel) return;
+          const willOpen = panel.hidden;
+          voucherPanels.forEach((p) => (p.hidden = true));
+          voucherTiles.forEach((t) => {
+            t.classList.remove("active");
+            t.setAttribute("aria-expanded", "false");
+          });
+          if (willOpen) {
+            panel.hidden = false;
+            tile.classList.add("active");
+            tile.setAttribute("aria-expanded", "true");
+          }
+        });
+      });
+
+      // modal + email
+      const voucherDialog = document.getElementById("voucher-dialog") as HTMLDialogElement | null;
+      const voucherForm = document.getElementById("voucher-form") as HTMLFormElement | null;
+
+      if (voucherDialog && voucherForm) {
+        document.querySelectorAll("[data-open-voucher]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const label = btn.getAttribute("data-voucher") || "";
+            const hidden = voucherForm.querySelector('input[name="voucher"]') as HTMLInputElement | null;
+            const chosen = document.getElementById("voucher-chosen");
+            if (hidden) hidden.value = label;
+            if (chosen) chosen.textContent = label;
+            voucherDialog.showModal();
+          });
+        });
+
+        document.querySelectorAll("[data-close-voucher]").forEach((btn) => {
+          btn.addEventListener("click", () => voucherDialog.close());
+        });
+
+        voucherDialog.addEventListener("click", (e) => {
+          if (e.target === voucherDialog) voucherDialog.close();
+        });
+
+        voucherForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const d = new FormData(voucherForm);
+          const subject = `Zamówienie vouchera: ${d.get("voucher")}`;
+          const body = [
+            `Voucher: ${d.get("voucher")}`,
+            `Kupujący: ${d.get("buyerName")} (${d.get("buyerEmail")})`,
+            `Obdarowany: ${d.get("recipientName")} (${d.get("recipientEmail") || "brak e-maila"})`,
+            "",
+            "Dedykacja:",
+            String(d.get("message") || "—"),
+          ].join("\n");
+
+          window.location.href = `mailto:jachimczak.klara@gmail.com?subject=${encodeURIComponent(
+            subject
+          )}&body=${encodeURIComponent(body)}`;
+
+          voucherDialog.close();
+          voucherForm.reset();
+        });
+      }
+    </script>
+
 
     <!-- FAQ -->
     <section id="faq" class="section section--white">
@@ -950,18 +1065,12 @@ additionally, add logic to send a voucher via email.
     </script>
 
     <section id="contact" class="section section--band">
-      <!-- <PianoKeys variant="divider" /> -->
-      <!---->
       <div class="main-logo">
         <img src="/claire_atelier_kolo_jednolity_sifonn.png" alt="Claire Atelier logo" />
       </div>
       <h2>Może właśnie znalazłeś swoją nową pasję?</h2>
-      <!-- <p class="band-sub"> -->
-      <!--  Zadzwoń. Zapisz się. Zacznij. -->
-      <!-- </p> -->
       <a class="cta-dark" href="mailto:jachimczak.klara@gmail.com">
 Zapisz się. Zacznij
-        <!-- jachimczak.klara@gmail.com -->
       </a>
     </section>
 
@@ -994,11 +1103,6 @@ Zapisz się. Zacznij
     </section>
 
     <!-- RODO / PRIVACY POLICY MODAL -->
-    <!--
-      Fill in the bracketed placeholders with your real business details
-      before publishing (legal name, NIP/REGON if applicable, and who
-      actually handles data requests).
-    -->
     <dialog id="rodo-dialog" class="inquiry-dialog rodo-dialog">
       <div class="inquiry-form rodo-form">
         <button type="button" class="inquiry-close" aria-label="Zamknij" data-close-rodo>&times;</button>
@@ -1078,9 +1182,6 @@ Zapisz się. Zacznij
       }
     </script>
 
-
-
-    <!-- PRACTICE -->
     <!-- INQUIRY MODAL (used by both lesson plans and Claire Practice) -->
     <dialog id="inquiry-dialog" class="inquiry-dialog">
       <form id="inquiry-form" class="inquiry-form">
@@ -1091,7 +1192,6 @@ Zapisz się. Zacznij
         </p>
 
         <fieldset class="inquiry-field inquiry-radios">
-          <!-- TODO: make legend look like bold/ ~h3, and label be softer and smaller font -->
           <legend>CLAIRE PIANO</legend>
           {plans.map((plan) => (
             <label class="inquiry-radio">
@@ -1111,7 +1211,6 @@ Zapisz się. Zacznij
           ))}
         </fieldset>
 
-        <!-- FIX 2: new fieldset so the Speech buttons have radios to select (required group otherwise fails validation) -->
         <fieldset class="inquiry-field inquiry-radios">
           <legend>Claire Speech</legend>
           {speechPackages.map((p) => (
@@ -1490,8 +1589,10 @@ Zapisz się. Zacznij
     opacity: 0.7;
     font-size: 1rem;
   }
+
   .section-piano-practice {
     margin-bottom: 0;
+    background: #fdecec; /* light red */
   }
 
   .section-more {
@@ -1547,6 +1648,24 @@ Zapisz się. Zacznij
       gap: 1.75rem;
     }
   }
+
+  /* ---------- SPEECH: DLA KOGO ---------- */
+  #dla-kogo-speech,
+  #dla-kogo-speech .principle h2,
+  #dla-kogo-speech .principle p { color: var(--black); }
+
+  #dla-kogo-speech .principle h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .speech-body { text-align: left; }
+  .speech-body :global(p) { margin: 0 0 0.9rem; line-height: 1.6; color: var(--black); }
+  .speech-body :global(.lead) { font-weight: 600; font-size: 1.05rem; }
+  .speech-body :global(ul) { margin: 0 0 0.9rem; padding-left: 1.2rem; }
+  .speech-body :global(li) { margin-bottom: 0.3rem; line-height: 1.5; color: var(--black); }
+  .speech-body :global(.quotes) { list-style: none; padding-left: 0; font-style: italic; }
+  .speech-body :global(.effect) { margin-top: 1.25rem; }
 
   /* ---------- PACKAGE COMPARISON ---------- */
   .package-grid {
@@ -1655,43 +1774,40 @@ Zapisz się. Zacznij
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
-    padding: 2rem 1.5rem; /* Mniejszy padding w poziomie, by dopasować do węższej karty */
+    padding: 2rem 1.5rem;
     text-align: center;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  /* Efekt Hover */
   .plans> div:hover {
     transform: translateY(-4px);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
-  } 
+  }
 
   .practices {
-    max-width: 760px; /* Wyraźnie zwężone, by zachować luksusowe proporcje */
+    max-width: 760px;
     margin: 3rem auto 0;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem; 
+    gap: 2rem;
     align-items: stretch;
-    padding: 0 1.5rem; 
+    padding: 0 1.5rem;
   }
 
-  /* Styl dla pojedynczego elementu/karty */
   .practices > div {
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
-    padding: 2rem 1.5rem; /* Mniejszy padding w poziomie, by dopasować do węższej karty */
+    padding: 2rem 1.5rem;
     text-align: center;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  /* Efekt Hover */
   .practices > div:hover {
     transform: translateY(-4px);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
-  } 
+  }
 
 .plan {
     background: var(--white);
@@ -1770,8 +1886,72 @@ Zapisz się. Zacznij
   @media (max-width: 780px) {
     .plans {
       grid-template-columns: 1fr;
-      flex-direction: column; /* FIX 8: .plans is display:flex, so grid-template-columns never applied; stack cards on mobile */
+      flex-direction: column; /* .plans is display:flex, so stack cards on mobile */
     }
+  }
+
+  /* ---------- VOUCHERS ---------- */
+  .voucher-tiles {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .voucher-tile {
+    flex: 1;
+    min-width: 240px;
+    max-width: 350px;
+    padding: 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: var(--white);
+    cursor: pointer;
+    color: var(--ink);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .voucher-tile:hover,
+  .voucher-tile.active {
+    border-color: var(--baby-blue-deep);
+    transform: translateY(-2px);
+  }
+
+  .voucher-tile.active { background: #f0f7ff; }
+  .voucher-tile h3 { font-weight: 500; margin-bottom: 0.4rem; }
+  .voucher-tile p { font-size: 0.9rem; opacity: 0.75; }
+
+  .voucher-panel {
+    max-width: 700px;
+    margin: 1.5rem auto 0;
+    padding: 1.5rem;
+    background: var(--white);
+    border: 1.5px solid var(--baby-blue-deep);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .voucher-panel[hidden] { display: none; }
+  .voucher-panel-title { font-weight: 600; color: var(--black); }
+
+  .voucher-group-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--baby-blue-deep);
+    margin-bottom: 0.5rem;
+  }
+
+  .voucher-options {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   /* ---------- LOCATION / MAP ---------- */
@@ -2071,6 +2251,12 @@ Zapisz się. Zacznij
   }
 
   .inquiry-radios legend {
+    font-family: var(--font-display, inherit);
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--black);
     padding: 0 0 0.5rem;
   }
 
@@ -2079,10 +2265,10 @@ Zapisz się. Zacznij
     align-items: center;
     gap: 0.55rem;
     font-family: var(--font-display, inherit);
-    font-size: 0.92rem;
+    font-size: 0.82rem;
     text-transform: none;
     letter-spacing: normal;
-    color: var(--ink);
+    color: var(--ink-soft);
     padding: 0.15rem 0;
   }
 
@@ -2222,7 +2408,9 @@ Zapisz się. Zacznij
     line-height: 1.65;
     color: var(--ink-soft);
   }
- .toggle-blocks-container {
+
+  /* ---------- PIANO / SPEECH TOGGLE ---------- */
+  .toggle-blocks-container {
     display: flex;
     gap: 20px;
     margin-bottom: 40px;
@@ -2254,7 +2442,7 @@ Zapisz się. Zacznij
     cursor: default;
   }
 
-  .toggle-block.active h2 { /* FIX 9: was "h3", but the buttons contain <h2>, so the active title never turned blue */
+  .toggle-block.active h2 {
     color: var(--baby-blue-deep);
   }
 
@@ -2262,58 +2450,57 @@ Zapisz się. Zacznij
     display: none !important;
   }
 
-.content-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 
-.content-section {
-  width: 100%;
-}
+  .content-section {
+    width: 100%;
+  }
 
-/* ---------- CLAIRE SPEECH ---------- */
-/* FIX 10: these classes were used in the markup but had no styles */
-.speech-list,
-.speech-quotes {/
-  max-width: 50ch;
-  margin: 1.5rem auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  font-size: 1rem;
-  line-height: 1.5;
-}
+  /* ---------- CLAIRE SPEECH ---------- */
+  .speech-list,
+  .speech-quotes {
+    max-width: 50ch;
+    margin: 1.5rem auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
 
-.speech-list p { opacity: 0.85; }
+  .speech-list p { opacity: 0.85; }
 
-.speech-quotes p {
-  font-style: italic;
-  color: var(--ink-light);
-}
+  .speech-quotes p {
+    font-style: italic;
+    color: var(--ink-light);
+  }
 
-.speech-program-details {
-  max-width: 700px;
-  margin: 2rem auto 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-}
+  .speech-program-details {
+    max-width: 700px;
+    margin: 2rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
 
-.speech-groups {
-  max-width: 700px;
-  margin: 2rem auto 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-}
+  .speech-groups {
+    max-width: 700px;
+    margin: 2rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
 
-#section-speech h3 { margin-top: 1.75rem; }
+  #section-speech h3 { margin-top: 1.75rem; }
 
-@media (max-width: 780px) {
-  .speech-groups { grid-template-columns: 1fr; }
-}
+  @media (max-width: 780px) {
+    .speech-groups { grid-template-columns: 1fr; }
+  }
 
 </style>
