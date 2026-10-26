@@ -209,20 +209,65 @@ const faqs = [
       </div>
       Claire Atelier
     </a>
-    <nav aria-label="Primary">
-    <!-- TODO: add three lines icon with menu so it's visible on mobile -->
-      <a href="#piano">Piano</a>
-      <a href="#speech">Speech</a>
-      <a href="#practice">Practice</a>
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Otwórz menu"
+      aria-expanded="false"
+      aria-controls="main-navigation"
+    >
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-navigation" aria-label="Nawigacja główna">
+      <a href="#piano-speech-tiles" data-nav-section="piano">Piano</a>
+      <a href="#piano-speech-tiles" data-nav-section="speech">Speech</a>
+      <a href="#practice" data-nav-section="piano">Practice</a>
       <a href="#voucher">Kup voucher</a>
       <a href="#faq">FAQ</a>
       <a href="#location">Znajdź nas</a>
-      <a href="#location">Dla firm</a>
+      <a href="#contact">Dla firm</a>
     </nav>
     <a class="cta-small"
       data-open-inquiry
     >Umów się na lekcję</a>
   </header>
+
+  <script>
+    const navToggle = document.querySelector(".nav-toggle") as HTMLButtonElement | null;
+    const mainNavigation = document.getElementById("main-navigation");
+
+    if (navToggle && mainNavigation) {
+      navToggle.addEventListener("click", () => {
+        const isOpen = navToggle.getAttribute("aria-expanded") === "true";
+        navToggle.setAttribute("aria-expanded", String(!isOpen));
+        navToggle.setAttribute("aria-label", isOpen ? "Otwórz menu" : "Zamknij menu");
+        mainNavigation.classList.toggle("is-open", !isOpen);
+      });
+
+      mainNavigation.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const section = link.dataset.navSection;
+          if (section) {
+            event.preventDefault();
+            const toggle = document.querySelector<HTMLButtonElement>(
+              section === "speech" ? '[data-target="#section-speech"]' : '[data-target="#section-piano"]'
+            );
+            if (toggle && !toggle.classList.contains("active")) toggle.click();
+            const target = link.getAttribute("href");
+            if (target === "#practice") {
+              window.setTimeout(() => document.querySelector("#practice")?.scrollIntoView({ behavior: "smooth" }), 0);
+            } else {
+              document.querySelector("#piano-speech-tiles")?.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+
+          mainNavigation.classList.remove("is-open");
+          navToggle.setAttribute("aria-expanded", "false");
+          navToggle.setAttribute("aria-label", "Otwórz menu");
+        });
+      });
+    }
+  </script>
 
   <main id="top">
     <!-- HERO -->
@@ -359,10 +404,9 @@ const faqs = [
       </div>
 
 
-<!-- TODO: add space after this -->
         <p class="offer-note">
           Oferta na start dotyczy Twoich pierwszych zajęć — ważna do <strong>30 października 2026</strong>.
-        </p><br><br>
+        </p>
 
     <section id="practice" class="section-piano-practice section">
       <h2>CLAIRE PRACTICE</h2>
@@ -804,7 +848,7 @@ const faqs = [
   </section>
 
     <!-- VOUCHERS -->
-    <section id="voucher" class="section section--mist">
+    <section id="voucher" class="section section--voucher">
       <h2>KUP VOUCHER</h2>
       <p class="section-sub">Podaruj muzykę albo pewny głos. Wybierz rodzaj vouchera.</p>
 
@@ -1389,9 +1433,72 @@ Zapisz się. Zacznij
     opacity: 1;
   }
 
+  .nav-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    border: 1px solid color-mix(in srgb, var(--black) 15%, transparent);
+    border-radius: 4px;
+    background: var(--white);
+    color: var(--ink);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    margin: 4px 0;
+    background: currentColor;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .nav-toggle[aria-expanded="true"] span:first-child {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle[aria-expanded="true"] span:last-child {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
   @media (max-width: 760px) {
+    .nav {
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .nav-toggle {
+      display: block;
+      margin-left: auto;
+    }
+
     .nav nav {
       display: none;
+      order: 4;
+      flex: 0 0 100%;
+      flex-direction: column;
+      gap: 0;
+      padding: 0.5rem 0;
+    }
+
+    .nav nav.is-open {
+      display: flex;
+    }
+
+    .nav nav a {
+      display: block;
+      padding: 0.85rem 0.25rem;
+      border-top: 1px solid color-mix(in srgb, var(--black) 8%, transparent);
+    }
+
+    .nav .cta-small {
+      order: 3;
     }
   }
 
@@ -1592,7 +1699,17 @@ Zapisz się. Zacznij
 
   .section-piano-practice {
     margin-bottom: 0;
-    background: #fdecec; /* light red */
+    background: #fdecec;
+  }
+
+  .section--practice {
+    background: #fdecec;
+    color: var(--ink-light);
+  }
+
+  .section--voucher {
+    background: #fdecec;
+    color: var(--ink);
   }
 
   .section-more {
@@ -1605,7 +1722,7 @@ Zapisz się. Zacznij
   .offer-note {
     text-align: center;
     max-width: 50ch;
-    margin: 2.5rem auto 0;
+    margin: 2.5rem auto 3.5rem;
     padding-top: 1.5rem;
     border-top: 1px solid color-mix(in srgb, var(--black) 10%, transparent);
     font-family: var(--font-mono);
