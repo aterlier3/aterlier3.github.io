@@ -1,0 +1,2684 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PianoKeys from "../components/PianoKeys.astro";
+import BlogCard from "../blocks/BlogCard/BlogCard.astro"
+// import FAQ from '@blocks/FAQ/FAQ.astro';
+//
+const principles = [
+  {
+    title: "MUZYKA",
+    body: "Bo wszystko zaczyna się od dźwięku. Muzyka buduje emocje, pozwala wyrażać siebie i odkrywać coś nowego. Uczysz się grać utwory, które naprawdę kochasz — i zaczynasz tworzyć własną muzyczną historię.",
+  },
+  {
+    title: "ROZWÓJ",
+    body: "Bo każda nowa umiejętność rozwija coś więcej. Pianino uczy koncentracji, pamięci, koordynacji, cierpliwości i systematyczności. Daje Ci przestrzeń, żeby zwolnić, skupić się i zobaczyć własny progres",
+  },
+  {
+    title: "RELACJE",
+    body: "Bo pasja łączy ludzi. Claire Atelier to będzie także miejsce spotkań. Kameralne zajęcia, koncerty, warsztaty i wydarzenia, podczas których możesz poznawać ludzi, dzielić się muzyką i tworzyć wspólne wspomnienia.",
+  },
+];
+
+// Body is HTML, rendered with set:html in the template.
+const speechDlaKogo = [
+  {
+    title: "DLA DZIECI",
+    body: `
+      <p class="lead">Mniej nieśmiałości. Więcej swobody.</p>
+      <p>Dziecko uczy się mówić wyraźnie, spokojnie i odważnie.</p>
+      <p>Z czasem łatwiej:</p>
+      <ul>
+        <li>odpowiada przed klasą,</li>
+        <li>prezentuje przygotowany materiał,</li>
+        <li>opowiada historię,</li>
+        <li>mówi do grupy,</li>
+        <li>zabiera głos,</li>
+        <li>radzi sobie z tremą.</li>
+      </ul>
+      <p>Nie chodzi o to, żeby dziecko mówiło „idealnie”.<br />Chodzi o to, żeby nie bało się własnego głosu.</p>
+      <p class="effect"><strong>EFEKT?</strong><br />Dziecko mówi wyraźniej, lepiej kontroluje głos i coraz swobodniej występuje przed innymi.</p>`,
+  },
+  {
+    title: "DLA NASTOLATKÓW",
+    body: `
+      <p class="lead">Znajdź swój głos. Dosłownie.</p>
+      <p>Okres dorastania to moment, kiedy szczególnie mocno zaczynamy oceniać siebie.</p>
+      <ul class="quotes">
+        <li>„Jak brzmi mój głos?”</li>
+        <li>„Czy mówię dziwnie?”</li>
+        <li>„Co pomyślą inni?”</li>
+        <li>„Czy dobrze wypadnę?”</li>
+      </ul>
+      <p>Claire Speech pomaga przełamać ten schemat.</p>
+      <p>Nastolatek uczy się:</p>
+      <ul>
+        <li>mówić wyraźnie i naturalnie,</li>
+        <li>prezentować bez paraliżującego stresu,</li>
+        <li>ciekawie opowiadać,</li>
+        <li>mówić do mikrofonu i kamery,</li>
+        <li>budować wypowiedź,</li>
+        <li>świadomie korzystać z głosu,</li>
+        <li>mówić własnym stylem.</li>
+      </ul>
+      <p class="effect"><strong>EFEKT?</strong><br />Więcej swobody w szkole, podczas wystąpień, nagrań i codziennych rozmów.</p>
+      <p>I większa pewność siebie, która zostaje na dłużej.</p>`,
+  },
+  {
+    title: "DLA DOROSŁYCH",
+    body: `
+      <p class="lead">Twój głos jest częścią Twojego wizerunku.</p>
+      <p>Podczas:</p>
+      <ul>
+        <li>spotkania,</li>
+        <li>prezentacji,</li>
+        <li>rozmowy rekrutacyjnej,</li>
+        <li>nagrania,</li>
+        <li>rozmowy z klientem,</li>
+        <li>wystąpienia,</li>
+        <li>rozmowy z własnym dzieckiem.</li>
+      </ul>
+      <p>To, jak mówisz, często decyduje o tym, jak zostaniesz odebrany.</p>
+      <p>Claire Speech pomaga, jeśli:</p>
+      <ul>
+        <li>mówisz zbyt szybko,</li>
+        <li>brzmisz monotonnie,</li>
+        <li>masz problem z wyraźną wymową,</li>
+        <li>stresujesz się wystąpieniami,</li>
+        <li>nie lubisz swojego głosu na nagraniach,</li>
+        <li>trudno Ci mówić naturalnie do kamery,</li>
+        <li>chcesz brzmieć bardziej profesjonalnie,</li>
+        <li>masz wiedzę i doświadczenie, ale trudno Ci je dobrze przekazać.</li>
+      </ul>
+      <p class="effect"><strong>EFEKT?</strong><br />Głos staje się bardziej świadomy, wyraźny i pewny.</p>
+      <p>A Twoje wypowiedzi zaczynają brzmieć tak dobrze, jak to, co masz do powiedzenia.</p>`,
+  },
+];
+
+const plans = [
+  {
+    name: "SOLO",
+    length: "60 min",
+    price: "99 zł",
+    oldPrice: "150 zł",
+    detail: "Ty, pianino i pełna uwaga prowadzącego. Indywidualne tempo, program dopasowany do Ciebie i przestrzeń na własny rozwój.",
+    highlight: false,
+  },
+  {
+    name: "DUO",
+    length: "60 min",
+    price: "89 zł / osoba",
+    oldPrice: "140 zł",
+    detail: "Nowa pasja, którą możesz dzielić z kimś bliskim. Przyjdź z drugą połówką, przyjacielem, kimś z rodziny czy znajomym.",
+    highlight: false,
+  },
+  {
+    name: "GRUPA",
+    length: "60 min",
+    price: "79 zł / osoba",
+    detail: "Muzyka, rozwój i nowe relacje. Kameralne grupy 3–4 osób, wspólna nauka i dobra atmosfera. Grupy tworzone przy zebraniu odpowiedniej liczby osób.",
+    highlight: false,
+  },
+];
+
+// Speech options for the inquiry modal. `name` MUST match the data-package values on the Speech buttons.
+const speechPackages = [
+  { name: "Pierwsza lekcja", length: "60 min", price: "99 zł" },
+  { name: "Kids", length: "4 zajęcia", price: "440 zł / mies." },
+  { name: "Teens", length: "4 zajęcia", price: "480 zł / mies." },
+  { name: "Adult", length: "4 zajęcia", price: "520 zł / mies." },
+];
+
+const practies = [
+  {
+    name: "PRACTICE 5",
+    length: "5 godzin",
+    price: "150 zł",
+    oldPrice: "",
+    detail: "Do wykorzytania w ciągu 6 tygodni",
+    highlight: false,
+  },
+  {
+    name: "PRACTICE 10",
+    length: "10 godzin",
+    price: "250 zł",
+    oldPrice: "",
+    detail: "Do wykorzytania w ciągu 12 tygodni",
+    highlight: false,
+  },
+];
+
+// Vouchers: two tiles, each unfolds a panel with options.
+const vouchers = [
+  {
+    id: "piano",
+    title: "VOUCHER PIANO",
+    sub: "Lekcje pianina w prezencie",
+    image: "/images/voucher-piano.jpg",
+    imageAlt: "Voucher prezentowy na lekcje pianina",
+    details: "Podaruj bliskiej osobie czas z muzyką i lekcje pianina dopasowane do jej poziomu. Wybierz liczbę lekcji oraz formę zajęć.",
+    panelTitle: "Wybierz liczbę lekcji i formę zajęć",
+    groups: [
+      { label: "1 lekcja", options: ["Solo", "Duo", "Grupa"] },
+      { label: "4 lekcje", options: ["Solo", "Duo", "Grupa"] },
+    ],
+  },
+  {
+    id: "speech",
+    title: "VOUCHER SPEECH",
+    sub: "Zajęcia Claire Speech w prezencie",
+    image: "/images/voucher-speech.jpg",
+    imageAlt: "Voucher prezentowy na zajęcia Claire Speech",
+    details: "Podaruj pewniejszy głos, swobodniejszą komunikację i rozwój umiejętności pracy z głosem. Wybierz zajęcia grupowe lub indywidualne.",
+    panelTitle: "Wybierz rodzaj zajęć",
+    groups: [{ label: "Zajęcia", options: ["Grupowe", "Indywidualne"] }],
+  },
+];
+
+// Replace with your real address — the embed and the directions link both read from this.
+const address = "aleja Grunwaldzka 212/2 Gdańsk";
+const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
+const directionsHref = `https://www.google.com/maps/place/CLAIRE+ATELIER/@54.3878737,18.5881261,18z/data=!4m6!3m5!1s0x46fd75218d2cc27d:0xd3fe2bd9e7b846cf!8m2!3d54.3878739!4d18.5895455!16s%2Fg%2F11zwwqjdr0?entry=ttu&g_ep=EgoyMDI2MTAwNS4wIKXMDSoASAFQAw%3D%3D`;
+
+const faqs = [
+  {
+    q: "Czy muszę umieć grać?",
+    a: "Nie. Claire Atelier jest również dla osób, które zaczynają od zera.",
+  },
+  {
+    q: "Czy muszę znać nuty?",
+    a: "Nie. Nauczysz się wszystkiego krok po kroku.",
+  },
+  {
+    q: "Czy muszę mieć własne pianino?",
+    a: "Nie. Możesz skorzystać z pakietu Dla ćwiczących w Claire Atelier.",
+  },
+  {
+    q: "Czy mogę przyjść z kimś?",
+    a: "Tak. Możecie wybrać zajęcia DUO albo dołączyć do kameralnej grupy.",
+  },
+  {
+    q: "Czy muszę od razu kupić pakiet?",
+    a: "Nie. Możesz zacząć od pierwszych zajęć w cenie startowej.",
+  },
+  {
+    q: "Do kiedy trwa oferta startowa?",
+    a: "Pierwsze zajęcia w cenie startowej są dostępne do 15 września 2026.",
+  },
+];
+---
+
+<Layout>
+  <header class="nav">
+    <a class="wordmark" href="#top">
+      <div class="main-logo">
+        <img src="/claire_atelier_kolo_jednolity_sifonn.png" alt="Claire Atelier logo" />
+      </div>
+      Claire Atelier
+    </a>
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Otwórz menu"
+      aria-expanded="false"
+      aria-controls="main-navigation"
+    >
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-navigation" aria-label="Nawigacja główna">
+      <a href="#piano-speech-tiles" data-nav-section="piano">Piano</a>
+      <a href="#piano-speech-tiles" data-nav-section="speech">Speech</a>
+      <a href="#practice" data-nav-section="piano">Practice</a>
+      <a href="#voucher">Kup voucher</a>
+      <a href="#faq">FAQ</a>
+      <a href="#location">Znajdź nas</a>
+      <a href="#contact">Dla firm</a>
+    </nav>
+    <a class="cta-small"
+      data-open-inquiry
+    >Umów się na lekcję</a>
+  </header>
+
+  <script>
+    const navToggle = document.querySelector(".nav-toggle") as HTMLButtonElement | null;
+    const mainNavigation = document.getElementById("main-navigation");
+
+    if (navToggle && mainNavigation) {
+      navToggle.addEventListener("click", () => {
+        const isOpen = navToggle.getAttribute("aria-expanded") === "true";
+        navToggle.setAttribute("aria-expanded", String(!isOpen));
+        navToggle.setAttribute("aria-label", isOpen ? "Otwórz menu" : "Zamknij menu");
+        mainNavigation.classList.toggle("is-open", !isOpen);
+      });
+
+      mainNavigation.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const section = link.dataset.navSection;
+          if (section) {
+            event.preventDefault();
+            const toggle = document.querySelector<HTMLButtonElement>(
+              section === "speech" ? '[data-target="#section-speech"]' : '[data-target="#section-piano"]'
+            );
+            if (toggle && !toggle.classList.contains("active")) toggle.click();
+            const target = link.getAttribute("href");
+            if (target === "#practice") {
+              window.setTimeout(() => document.querySelector("#practice")?.scrollIntoView({ behavior: "smooth" }), 0);
+            } else {
+              document.querySelector("#piano-speech-tiles")?.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+
+          mainNavigation.classList.remove("is-open");
+          navToggle.setAttribute("aria-expanded", "false");
+          navToggle.setAttribute("aria-label", "Otwórz menu");
+        });
+      });
+    }
+  </script>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <p class="eyebrow">Muzyka · Rozwój · Relacje</p>
+
+      <h1>
+        Claire Atelier<br />
+        <em>Piano Studio</em>
+      </h1>
+      <p class="hero-sub">
+        <i>Tu nie tylko uczysz się grać. <br />
+        Tu rozwijasz siebie i tworzysz relacje.</i><br /><br />
+        Kameralne studio pianina w Gdańsku dla osób, które chcą znaleźć nową pasję, rozwijać się i spędzać czas w dobrym towarzystwie.
+      </p>
+      <div class="hero-actions">
+        <a class="cta-primary" href="#piano-speech-tiles">UMÓW PIERWSZE ZAJĘCIA</a>
+      </div>
+      <p class="meta-line">Grunwaldzka 212/2, Gdańsk</p>
+    </section>
+
+    <!-- PILLARS -->
+    <section id="pillars" class="section section--mist">
+      <div class="principles">
+        {principles.map((p) => (
+          <div class="principle">
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+
+
+<!-- PIANO and SPEECH sections -->
+<script>
+  function initToggle() {
+    const blocks = document.querySelectorAll('.toggle-block') as NodeListOf<HTMLButtonElement>;
+    const sections = document.querySelectorAll('.content-section') as NodeListOf<HTMLElement>;
+
+    blocks.forEach((clickedBlock) => {
+      clickedBlock.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const targetSelector = clickedBlock.getAttribute('data-target');
+        if (!targetSelector) return;
+
+        // Resetowanie stanów kafelków i sekcji
+        blocks.forEach((block) => {
+          block.classList.remove('active');
+          block.disabled = false;
+        });
+        sections.forEach((section) => {
+          section.classList.add('hidden');
+        });
+
+        // Aktywacja wybranego kafelka i sekcji
+        clickedBlock.classList.add('active');
+        clickedBlock.disabled = true;
+
+        const targetSection = document.querySelector(targetSelector);
+        if (targetSection) {
+          targetSection.classList.remove('hidden');
+        }
+      });
+    });
+  }
+
+  // Uruchomienie skryptu przy ładowaniu strony i wsparcie dla View Transitions
+  initToggle();
+  document.addEventListener('astro:page-load', initToggle);
+</script>
+
+<section id="piano-speech-tiles" class="section section--white">
+<div class="toggle-blocks-container">
+
+  <!-- Kafelek Piano - domyślnie aktywny (active i disabled) -->
+  <button
+    type="button"
+    class="toggle-block active"
+    disabled
+    data-target="#section-piano"
+  >
+    <h2>CLAIRE PIANO</h2>
+  </button>
+
+  <!-- Kafelek Speech -->
+  <button
+    type="button"
+    class="toggle-block"
+    data-target="#section-speech"
+  >
+    <h2>CLAIRE SPEECH</h2>
+  </button>
+
+</div>
+
+<!-- CLAIRE PIANO | SPEECH sections -->
+<div class="content-container">
+
+  <!-- PIANO -->
+  <section id="section-piano" class="content-section">
+
+    <section id="pricing" class="section section--white">
+      <h2>OFERTA NA START</h2>
+      <p class="section-sub">Z OKAZJI OTWARCIA CLAIRE ATELIER</p>
+
+      <div class="plans">
+        {plans.map((plan) => (
+          <div class={`plan ${plan.highlight ? "plan--highlight" : ""}`}>
+            <p class="plan-length">{plan.length}</p>
+            <h3>{plan.name}</h3>
+
+            <p class="plan-price">
+              {plan.price}
+              {plan.oldPrice && (
+                <s class="plan-price-old">{plan.oldPrice}</s>
+              )}
+            </p>
+
+            <p class="plan-detail">{plan.detail}</p>
+
+            <button
+              type="button"
+              class={plan.highlight ? "cta-primary" : "cta-ghost"}
+              data-open-inquiry
+              data-package={plan.name}
+            >
+              Zarezerwuj pierwsze zajęcia
+            </button>
+          </div>
+        ))}
+      </div>
+
+
+        <p class="offer-note">
+          Oferta na start dotyczy Twoich pierwszych zajęć — ważna do <strong>30 października 2026</strong>.
+        </p>
+
+    <section id="practice" class="section-piano-practice section">
+      <h2>CLAIRE PRACTICE</h2>
+
+      <p class="section-sub">
+        <b>Nie masz pianina w domu? To nie problem.</b><br>
+        <br />
+        Wykup pakiet i ćwicz u nas.
+      </p>
+
+
+      <div class="plans">
+        {practies.map((plan) => (
+          <div class={`plan ${plan.highlight ? "plan--highlight" : ""}`}>
+            <p class="plan-length">{plan.length}</p>
+            <h3>{plan.name}</h3>
+            <p class="plan-price">{plan.price}</p>
+            <p class="plan-detail">{plan.detail}</p>
+
+            <button
+              type="button"
+              class={plan.highlight ? "cta-primary" : "cta-ghost"}
+              data-open-inquiry
+              data-package={plan.name}
+            >
+              Wybierz
+            </button>
+          </div>
+        ))}
+      </div>
+
+    </section>
+    </section>
+  </section> <!-- end of #section-piano -->
+
+  <!-- CLAIRE SPEECH -->
+  <section id="section-speech" class="content-section hidden">
+
+  <!-- HERO / INTRO -->
+  <section id="speech-intro" class="section section--white">
+    <h2>CLAIRE SPEECH</h2>
+
+    <p class="section-sub">
+      <strong>Twój głos. Twoja pewność. Twoja satysfakcja.</strong>
+    </p>
+
+    <p class="section-sub">
+      Claire Speech to zajęcia dla dzieci, nastolatków i dorosłych,
+      którzy chcą mówić wyraźniej, swobodniej i z większą pewnością siebie.
+    </p>
+
+    <p class="section-sub">
+      Nie uczymy „ładnego mówienia”.<br /><br />
+      Uczymy jak mówić tak, żeby inni chcieli Cię słuchać —
+      i żeby Tobie dobrze było ze swoim własnym głosem.
+    </p>
+
+    <p class="section-sub">
+      Małe grupy do 8–10 osób.<br />
+      1 spotkanie w tygodniu.<br />
+      Miesięczny program.
+    </p>
+
+    <br>
+    <button
+      type="button"
+      class="cta-primary"
+      data-open-inquiry
+      data-package="Pierwsza lekcja"
+    >
+      ZAPISZ SIĘ
+    </button>
+  </section>
+
+
+  <!-- CO SIĘ ZMIENI -->
+  <section id="speech-change" class="section section--mist">
+    <h2>CO SIĘ ZMIENI?</h2>
+
+    <p class="section-sub">
+      Możesz znać tę sytuację.
+    </p>
+
+    <div class="speech-list">
+      <p>Mówisz za szybko.</p>
+      <p>Połykasz końcówki słów.</p>
+      <p>Mówisz za cicho.</p>
+      <p>Twój głos drży, kiedy wszyscy patrzą.</p>
+      <p>Na nagraniu brzmisz zupełnie inaczej, niż sobie wyobrażasz.</p>
+      <p>Masz coś ciekawego do powiedzenia, ale trudno Ci to dobrze przekazać.</p>
+      <p>Przy prezentacji nagle pojawia się pustka w głowie.</p>
+      <p>Ciągle w przerwach: yyyyyymmmmmm.</p>
+      <p>
+        Albo po prostu czujesz, że Twój głos nie pokazuje tego,
+        kim naprawdę jesteś.
+      </p>
+    </div>
+
+    <p class="section-sub">
+      <strong>Claire Speech pomaga to zmienić.</strong>
+    </p>
+  </section>
+
+  <!-- DLA KOGO -->
+  <section id="dla-kogo-speech" class="section section--white">
+    <div class="principles">
+      {speechDlaKogo.map((p) => (
+        <div class="principle">
+          <h2>{p.title}</h2>
+          <div class="speech-body" set:html={p.body} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- USŁYSZYSZ SWÓJ PROGRES -->
+  <section id="speech-progress" class="section section--mist">
+    <h2>NAJWAŻNIEJSZE: USŁYSZYSZ SWÓJ PROGRES</h2>
+
+    <p class="section-sub">
+      Każdy uczestnik Claire Speech nagrywa 2-minutową wypowiedź
+      na początku programu.
+    </p>
+
+    <p class="section-sub">
+      To punkt wyjścia.
+      <br /><br />
+      Nie poprawiamy jej na siłę.
+      Nie udajemy, że wszystko jest idealne.
+      <br /><br />
+      Po prostu nagrywamy Ciebie takim, jaki jesteś na początku.
+    </p>
+
+    <p class="section-sub">
+      A na końcu programu nagrywasz kolejne 2 minuty.
+    </p>
+
+    <p class="section-sub">
+      <strong>
+        Ten sam człowiek.<br />
+        Ten sam głos.<br />
+        Inne umiejętności.
+      </strong>
+    </p>
+
+    <p class="section-sub">
+      Dostajesz coś, czego nie da się opowiedzieć słowami.
+      <br /><br />
+      <strong>Słyszysz różnicę.</strong>
+    </p>
+
+    <p class="section-sub">
+      To namacalny efekt całej pracy.
+      <br /><br />
+      I jednocześnie pamiątka, do której możesz wrócić
+      za rok czy za kilka lat.
+    </p>
+  </section>
+
+
+  <!-- A W TRAKCIE -->
+  <section id="speech-practice" class="section section--white">
+    <h2>A W TRAKCIE?</h2>
+
+    <p class="section-sub">
+      Nie chcemy, żeby cały czas mówił prowadzący.
+      <br /><br />
+      <strong>Ty masz mówić.</strong>
+    </p>
+
+    <p class="section-sub">
+      Dlatego podczas zajęć jest również przestrzeń
+      na pracę nad Twoim własnym tekstem.
+    </p>
+
+    <p class="section-sub">
+      Możesz przynieść coś, co naprawdę chcesz powiedzieć.
+    </p>
+
+    <p class="section-sub">
+      Możesz pracować nad:
+    </p>
+
+    <div class="speech-list">
+      <p>tekstem do social mediów,</p>
+      <p>prezentacją,</p>
+      <p>przemówieniem,</p>
+      <p>opowiadaniem,</p>
+      <p>tekstem do portfolio,</p>
+      <p>autoprezentacją,</p>
+      <p>nagraniem do CV,</p>
+      <p>podcastem,</p>
+      <p>listem lub podziękowaniem,</p>
+      <p>tekstem dla bliskiej osoby.</p>
+    </div>
+
+    <p class="section-sub">
+      Nie ma jednego właściwego projektu.
+      <br /><br />
+      <strong>Co z tego wyjdzie? To zależy od Ciebie.</strong>
+    </p>
+
+    <p class="section-sub">
+      Może to być podziękowanie dla rodziców.
+      <br />
+      Wyznanie miłości drugiej połówce.
+      <br />
+      Tekst mówiony na social media.
+      <br />
+      Fragment Twojego portfolio.
+      <br />
+      Nagranie, które dołączysz do CV.
+      <br />
+      Albo po prostu coś, co od dawna chciałeś powiedzieć,
+      ale nie wiedziałeś, jak.
+    </p>
+
+    <p class="section-sub">
+      My pomagamy Ci ubrać to w słowa i dobrze wypowiedzieć.
+    </p>
+  </section>
+
+
+  <!-- REZULTAT -->
+  <section id="speech-result" class="section section--mist">
+    <h2>NIE TYLKO ĆWICZENIA. PRAWDZIWY REZULTAT.</h2>
+
+    <p class="section-sub">
+      Na Claire Speech nie kończysz programu z zeszytem pełnym notatek.
+      <br /><br />
+      Kończysz go z:
+    </p>
+
+    <div class="speech-list">
+      <p>większą swobodą mówienia,</p>
+      <p>lepszą dykcją,</p>
+      <p>większą kontrolą nad głosem,</p>
+      <p>większą pewnością siebie,</p>
+      <p>doświadczeniem przed mikrofonem i kamerą,</p>
+      <p>własnym nagraniem „przed”,</p>
+      <p>własnym nagraniem „po”,</p>
+      <p>i projektem, który naprawdę jest Twój.</p>
+    </div>
+  </section>
+
+
+  <!-- PROGRAM -->
+  <section id="speech-program" class="section section--white">
+    <h2>JAK WYGLĄDA PROGRAM?</h2>
+
+    <div class="speech-program-details">
+      <p><strong>4</strong> spotkania w miesiącu</p>
+      <p><strong>1 ×</strong> w tygodniu</p>
+      <p><strong>60–75</strong> minut</p>
+      <p>grupy do <strong>8–10 osób</strong></p>
+    </div>
+
+    <p class="section-sub">
+      Każde zajęcia to przede wszystkim praktyka.
+    </p>
+
+    <div class="speech-list">
+      <p>Ćwiczymy głos.</p>
+      <p>Mówimy.</p>
+      <p>Nagrywamy.</p>
+      <p>Pracujemy nad tekstami.</p>
+      <p>Dostajemy feedback.</p>
+      <p>Sprawdzamy, co się zmienia.</p>
+      <p>Poznajemy strukturę głosu i jego higienę.</p>
+    </div>
+
+    <p class="section-sub">
+      Program jest prowadzony osobno dla:
+    </p>
+
+    <div class="speech-groups">
+      <div class="plan">
+        <h3>KIDS</h3>
+        <p class="plan-detail">dzieci</p>
+      </div>
+
+      <div class="plan">
+        <h3>TEENS</h3>
+        <p class="plan-detail">nastolatków</p>
+      </div>
+
+      <div class="plan">
+        <h3>ADULT</h3>
+        <p class="plan-detail">dorosłych</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- PIERWSZA LEKCJA -->
+  <section id="speech-first-lesson" class="section section--mist">
+    <h2>PIERWSZA LEKCJA</h2>
+
+    <p class="section-sub">
+      <strong>Zacznij od 99 zł</strong>
+    </p>
+
+    <p class="section-sub">
+      Pierwsze zajęcia są tańsze, żebyś mógł sprawdzić,
+      jak pracujemy, zanim zdecydujesz się na cały miesiąc.
+      <br /><br />
+      Jeśli chcesz kontynuować, zapisujesz się na miesięczny cykl 4 zajęć.
+    </p>
+    <br>
+    <button
+      type="button"
+      class="cta-primary"
+      data-open-inquiry
+      data-package="Pierwsza lekcja"
+    >
+      ZAPISZ SIĘ
+    </button>
+  </section>
+
+
+  <!-- CENNIK -->
+  <section id="peech-pricing" class="section section--white">
+    <h2>CENNIK</h2>
+
+    <p class="section-sub">
+      <strong>4 zajęcia</strong>
+    </p>
+
+    <div class="plans">
+
+      <div class="plan">
+        <h3>CLAIRE SPEECH KIDS</h3>
+        <p class="plan-price">440 zł / miesiąc</p>
+
+        <button
+          type="button"
+          class="cta-ghost"
+          data-open-inquiry
+          data-package="Kids"
+        >
+          ZAPISZ SIĘ
+        </button>
+      </div>
+
+      <div class="plan">
+        <h3>CLAIRE SPEECH TEENS</h3>
+        <p class="plan-price">480 zł / miesiąc</p>
+
+        <button
+          type="button"
+          class="cta-primary"
+          data-open-inquiry
+          data-package="Teens"
+        >
+          ZAPISZ SIĘ
+        </button>
+      </div>
+
+      <div class="plan">
+        <h3>CLAIRE SPEECH ADULT</h3>
+        <p class="plan-price">520 zł / miesiąc</p>
+
+        <button
+          type="button"
+          class="cta-ghost"
+          data-open-inquiry
+          data-package="Adult"
+        >
+          ZAPISZ SIĘ
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="speech-final" class="section section--mist">
+    <h2>ZACZYNASZ OD SWOJEGO GŁOSU.</h2>
+
+    <p class="section-sub">
+      A kończysz z czymś więcej.
+      <br /><br />
+      Z większą swobodą.<br />
+      Z większą pewnością.<br />
+      Z doświadczeniem.<br />
+      Z własnym nagraniem.<br />
+      I z głosem, który w końcu brzmi jak Ty.
+    </p>
+
+    <p class="section-sub">
+      <strong>Mów wyraźnie. Mów pewnie. Mów po swojemu.</strong>
+    </p>
+    <br><br>
+    <button
+      type="button"
+      class="cta-primary"
+      data-open-inquiry
+      data-package="Pierwsza lekcja"
+    >
+      DOŁĄCZ DO CLAIRE SPEECH
+    </button>
+  </section>
+  </section> <!-- end #section-speech -->
+</div>
+</section>
+
+  <section id="more" class="section section--white more-section">
+    <h2>TU DZIEJE SIĘ COŚ WIĘCEJ</h2>
+    <section class="about">
+      <p class="about-lead">
+        <strong>To nie tylko zajęcia przy pianinie.</strong><br />
+        To miejsce, w którym muzyka stanie się pretekstem do spotkań,
+        rozmów i wspólnego spędzania czasu.
+      </p>
+      <ul class="school-events">
+        <li>Kameralne koncerty</li>
+        <li>Warsztaty</li>
+        <li>Spotkania</li>
+        <li>Muzyka na żywo</li>
+        <li>Wieczory w dobrym towarzystwie</li>
+      </ul>
+      <p class="about-lead">
+      <em>Miejsce, w którym możesz nie tylko czerpać, ale też coś od siebie dawać.</em>
+      </p>
+    </section>
+  </section>
+
+  <section class="section section--mist">
+    <h2 class="accent">POZNAJ KLARĘ</h2>
+    <br>
+    <p class="hero-sub-white">
+      <b>Pianistka, nauczycielka i doradca finansowy. Łączę trzy światy: muzykę, edukację i finanse.</b> I właśnie to połączenie jest moją siłą. <br><br>
+      Od blisko <b>9 lat uczę gry na fortepianie. </b> Jestem absolwentką Akademii Muzycznej w Gdańsku, laureatką konkursów pianistycznych w Polsce i za granicą oraz uczestniczką <b>kilkudziesięciu kursów i warsztatów mistrzowskich.</b> Mam również bogate doświadczenie sceniczne – występowałam m.in. w Narodowym Forum Muzyki we Wrocławiu, Filharmonii Bałtyckiej, Radiu Gdańsk, na Zamku Królewskim w Warszawie i w Żelazowej Woli. <br><br>
+      Przez kilka lat byłam <b>przewodniczącą Międzywydziałowego Koła Muzyki Kameralnej</b> Akademii Muzycznej w Gdańsku, aktywnie angażując się w życie artystyczne i edukacyjne uczelni. <br><br>
+      W pracy z uczniami stawiam na <b>indywidualne podejście, zaangażowanie i radość z muzyki. </b> Lubię, kiedy nauka ma swój plan, dlatego tworzę indywidualne plany ćwiczeń i proste tabelki, które pomagają ćwiczyć regularnie, świadomie i bez nudy. <br><br>
+      Jako Doradca Finansowy wiem, że liczby to nie wszystko. <b>Do muzyki podchodzę z planem, a do rozmów o finansach – z człowiekiem po drugiej stronie.</b> Łączenie tych światów nauczyło mnie, że rozwój wymaga pasji, wiedzy, konsekwencji i indywidualnego podejścia. <br> <br>
+      <b>Wierzę, że świat bez muzyki byłby zdecydowanie uboższy, a życie bez pasji i finansowego spokoju – zdecydowanie trudniejsze.</b> <br> Warto inwestować w to, co naprawdę ma dla nas znaczenie. <br>
+    </p>
+  </section>
+
+    <!-- VOUCHERS -->
+    <section id="voucher" class="section section--practice">
+      <h2>KUP VOUCHER</h2>
+      <p class="section-sub">Podaruj muzykę albo pewny głos. Wybierz rodzaj vouchera.</p>
+
+      <div class="voucher-tiles">
+        {vouchers.map((v) => (
+          <button
+            type="button"
+            class="voucher-tile"
+            data-voucher-tile={v.id}
+            aria-expanded="false"
+            aria-controls={`voucher-panel-${v.id}`}
+          >
+            <img class="voucher-tile-image" src={v.image} alt={v.imageAlt} loading="lazy" />
+            <span class="voucher-tile-copy">
+              <span class="voucher-tile-title">{v.title}</span>
+              <span class="voucher-tile-sub">{v.sub}</span>
+              <span class="voucher-tile-hint">Kliknij, aby poznać szczegóły</span>
+            </span>
+          </button>
+        ))}
+      </div>
+
+      {vouchers.map((v) => (
+        <div class="voucher-panel" id={`voucher-panel-${v.id}`} hidden>
+          <div class="voucher-detail-layout">
+            <img class="voucher-detail-image" src={v.image} alt={v.imageAlt} loading="lazy" />
+            <div class="voucher-detail-copy">
+              <h3 class="voucher-detail-title">{v.title}</h3>
+              <p>{v.details}</p>
+            </div>
+          </div>
+          <p class="voucher-panel-title">{v.panelTitle}</p>
+          {v.groups.map((g) => (
+            <div class="voucher-group">
+              <span class="voucher-group-label">{g.label}</span>
+              <div class="voucher-options">
+                {g.options.map((o) => (
+                  <button
+                    type="button"
+                    class="cta-ghost"
+                    data-open-voucher
+                    data-voucher={`${v.title} — ${g.label} — ${o}`}
+                  >
+                    {o}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </section>
+
+    <!-- VOUCHER MODAL -->
+    <dialog id="voucher-dialog" class="inquiry-dialog">
+      <form id="voucher-form" class="inquiry-form">
+        <button type="button" class="inquiry-close" aria-label="Zamknij" data-close-voucher>&times;</button>
+        <h3>Zamów voucher</h3>
+        <p class="inquiry-sub" id="voucher-chosen"></p>
+        <input type="hidden" name="voucher" />
+
+        <label class="inquiry-field">
+          Imię i nazwisko kupującego
+          <input type="text" name="buyerName" required autocomplete="name" />
+        </label>
+
+        <label class="inquiry-field">
+          Twój e-mail
+          <input type="email" name="buyerEmail" required autocomplete="email" />
+        </label>
+
+        <label class="inquiry-field">
+          Imię obdarowanego
+          <input type="text" name="recipientName" required />
+        </label>
+
+        <label class="inquiry-field">
+          E-mail obdarowanego
+          <input type="email" name="recipientEmail" />
+        </label>
+
+        <label class="inquiry-field">
+          Dedykacja (opcjonalnie)
+          <textarea name="message" rows="3"></textarea>
+        </label>
+
+        <label class="inquiry-consent">
+          <input type="checkbox" name="rodoConsent" required />
+          <span>
+            Wyrażam zgodę na przetwarzanie moich danych osobowych w celu realizacji zamówienia,
+            zgodnie z <a href="#rodo" data-open-rodo>Polityką Prywatności (RODO)</a>.*
+          </span>
+        </label>
+
+        <button type="submit" class="cta-primary inquiry-submit">Wyślij zamówienie</button>
+      </form>
+    </dialog>
+
+    <script>
+      // tiles -> unfold panels
+      const voucherTiles = document.querySelectorAll("[data-voucher-tile]");
+      const voucherPanels = document.querySelectorAll(".voucher-panel") as NodeListOf<HTMLElement>;
+
+      voucherTiles.forEach((tile) => {
+        tile.addEventListener("click", () => {
+          const id = tile.getAttribute("data-voucher-tile");
+          const panel = document.getElementById(`voucher-panel-${id}`);
+          if (!panel) return;
+          const willOpen = panel.hidden;
+          voucherPanels.forEach((p) => (p.hidden = true));
+          voucherTiles.forEach((t) => {
+            t.classList.remove("active");
+            t.setAttribute("aria-expanded", "false");
+          });
+          if (willOpen) {
+            panel.hidden = false;
+            tile.classList.add("active");
+            tile.setAttribute("aria-expanded", "true");
+          }
+        });
+      });
+
+      // modal + email
+      const voucherDialog = document.getElementById("voucher-dialog") as HTMLDialogElement | null;
+      const voucherForm = document.getElementById("voucher-form") as HTMLFormElement | null;
+
+      if (voucherDialog && voucherForm) {
+        document.querySelectorAll("[data-open-voucher]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const label = btn.getAttribute("data-voucher") || "";
+            const hidden = voucherForm.querySelector('input[name="voucher"]') as HTMLInputElement | null;
+            const chosen = document.getElementById("voucher-chosen");
+            if (hidden) hidden.value = label;
+            if (chosen) chosen.textContent = label;
+            voucherDialog.showModal();
+          });
+        });
+
+        document.querySelectorAll("[data-close-voucher]").forEach((btn) => {
+          btn.addEventListener("click", () => voucherDialog.close());
+        });
+
+        voucherDialog.addEventListener("click", (e) => {
+          if (e.target === voucherDialog) voucherDialog.close();
+        });
+
+        voucherForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const d = new FormData(voucherForm);
+          const subject = `Zamówienie vouchera: ${d.get("voucher")}`;
+          const body = [
+            `Voucher: ${d.get("voucher")}`,
+            `Kupujący: ${d.get("buyerName")} (${d.get("buyerEmail")})`,
+            `Obdarowany: ${d.get("recipientName")} (${d.get("recipientEmail") || "brak e-maila"})`,
+            "",
+            "Dedykacja:",
+            String(d.get("message") || "—"),
+          ].join("\n");
+
+          window.location.href = `mailto:jachimczak.klara@gmail.com?subject=${encodeURIComponent(
+            subject
+          )}&body=${encodeURIComponent(body)}`;
+
+          voucherDialog.close();
+          voucherForm.reset();
+        });
+      }
+    </script>
+
+
+    <!-- FAQ -->
+    <section id="faq" class="section section--white">
+      <h2>FAQ</h2>
+      <p class="section-sub">Najczęściej zadawane pytania.</p>
+      <div class="faq-list">
+        {faqs.map((item) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{item.q}</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <p class="faq-answer">{item.a}</p>
+          </details>
+        ))}
+      </div>
+      <br>
+      <button type="button" class="cta-ghost faq-ask-btn" data-open-question>
+        Nie znalazłeś odpowiedzi? Zadaj pytanie
+      </button>
+    </section>
+
+    <!-- CUSTOM QUESTION MODAL -->
+    <dialog id="question-dialog" class="inquiry-dialog">
+      <form id="question-form" class="inquiry-form">
+        <button type="button" class="inquiry-close" aria-label="Zamknij" data-close-question>&times;</button>
+        <h3>Zadaj pytanie</h3>
+        <p class="inquiry-sub">
+          Napisz do nas — odpowiemy najszybciej, jak to możliwe.
+        </p>
+
+        <label class="inquiry-field">
+          Imię i nazwisko
+          <input type="text" name="name" required autocomplete="name" />
+        </label>
+
+        <label class="inquiry-field">
+          Adres e-mail
+          <input type="email" name="email" required autocomplete="email" />
+        </label>
+
+        <label class="inquiry-field">
+          Treść pytania
+          <textarea name="question" rows="4" required></textarea>
+        </label>
+
+        <label class="inquiry-consent">
+          <input type="checkbox" name="rodoConsent" required />
+          <span>
+            Wyrażam zgodę na przetwarzanie moich danych osobowych w celu obsługi zapytania,
+            zgodnie z <a href="#rodo" data-open-rodo>Polityką Prywatności (RODO)</a>.*
+          </span>
+        </label>
+
+        <button type="submit" class="cta-primary inquiry-submit">Wyślij pytanie</button>
+      </form>
+    </dialog>
+
+    <script>
+      const questionDialog = document.getElementById("question-dialog") as HTMLDialogElement | null;
+      const questionForm = document.getElementById("question-form") as HTMLFormElement | null;
+
+      if (questionDialog && questionForm) {
+        document.querySelectorAll("[data-open-question]").forEach((btn) => {
+          btn.addEventListener("click", () => questionDialog.showModal());
+        });
+
+        document.querySelectorAll("[data-close-question]").forEach((btn) => {
+          btn.addEventListener("click", () => questionDialog.close());
+        });
+
+        questionDialog.addEventListener("click", (event) => {
+          if (event.target === questionDialog) questionDialog.close();
+        });
+
+        questionForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const data = new FormData(questionForm);
+          const name = data.get("name");
+          const email = data.get("email");
+          const question = data.get("question");
+
+          const subject = `Pytanie od ${name}`;
+          const body = [
+            `Imię i nazwisko: ${name}`,
+            `E-mail: ${email}`,
+            "",
+            "Treść pytania:",
+            String(question),
+          ].join("\n");
+
+          window.location.href = `mailto:jachimczak.klara@gmail.com?subject=${encodeURIComponent(
+            subject
+          )}&body=${encodeURIComponent(body)}`;
+
+          questionDialog.close();
+          questionForm.reset();
+        });
+      }
+    </script>
+
+    <section id="contact" class="section section--band">
+      <div class="main-logo">
+        <img src="/claire_atelier_kolo_jednolity_sifonn.png" alt="Claire Atelier logo" />
+      </div>
+      <h2>Może właśnie znalazłeś swoją nową pasję?</h2>
+      <a class="cta-dark" href="mailto:jachimczak.klara@gmail.com">
+Zapisz się. Zacznij
+      </a>
+    </section>
+
+    <!-- LOCATION / MAP -->
+    <section id="location" class="section section--black">
+      <h2>Znajdź nas</h2>
+      <div class="location-layout">
+        <div class="location-info">
+          <dl>
+            <dt>Adres</dt>
+            <dd>{address}</dd>
+            <dt>Godziny otwarcia</dt>
+            <dd>Pon-Sob 10:00–22:00<br /></dd>
+            <dt>Telefon</dt>
+            <dd>+48 791 554 669</dd>
+          </dl>
+          <a class="cta-primary" href={directionsHref} target="_blank" rel="noopener noreferrer">
+            Nawiguj
+          </a>
+        </div>
+        <div class="location-map">
+          <iframe
+            title="Claire Atelier location"
+            src={mapEmbedSrc}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- RODO / PRIVACY POLICY MODAL -->
+    <dialog id="rodo-dialog" class="inquiry-dialog rodo-dialog">
+      <div class="inquiry-form rodo-form">
+        <button type="button" class="inquiry-close" aria-label="Zamknij" data-close-rodo>&times;</button>
+        <h3>Polityka prywatności (RODO)</h3>
+        <div class="rodo-content">
+          <h3>Administrator danych osobowych</h3>
+          <p>
+            Administratorem danych osobowych przekazywanych za pośrednictwem formularzy na
+            niniejszej stronie jest Klara Jachimczak, {address}, e-mail:
+            jachimczak.klara@gmail.com.
+          </p>
+
+          <h3>Cel i podstawa prawna przetwarzania danych</h3>
+          <p>
+            Dane osobowe (imię i nazwisko, adres e-mail, numer telefonu, treść wiadomości)
+            przetwarzane są w celu odpowiedzi na zapytanie, rezerwacji zajęć lub pakietu oraz
+            kontaktu w sprawach związanych z ofertą Claire Atelier — na podstawie zgody osoby,
+            której dane dotyczą (art. 6 ust. 1 lit. a RODO), wyrażonej poprzez zaznaczenie
+            odpowiedniego pola w formularzu.
+          </p>
+
+          <h3>Odbiorcy danych</h3>
+          <p>
+            Dane nie są przekazywane podmiotom trzecim, z wyjątkiem dostawców usług niezbędnych
+            do obsługi zapytania (np. skrzynki e-mail), którzy przetwarzają dane wyłącznie na
+            polecenie administratora.
+          </p>
+
+          <h3>Okres przechowywania danych</h3>
+          <p>
+            Dane przechowywane są przez czas niezbędny do obsługi zapytania lub rezerwacji, a
+            następnie do czasu przedawnienia ewentualnych roszczeń lub do momentu wycofania zgody.
+          </p>
+
+          <h3>Prawa osoby, której dane dotyczą</h3>
+          <p>
+            Każdej osobie przysługuje prawo dostępu do swoich danych, ich sprostowania, usunięcia,
+            ograniczenia przetwarzania, przenoszenia danych, a także prawo do wycofania zgody w
+            dowolnym momencie bez wpływu na zgodność z prawem przetwarzania dokonanego przed jej
+            wycofaniem. Przysługuje również prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych
+            Osobowych.
+          </p>
+
+          <h3>Dobrowolność podania danych</h3>
+          <p>
+            Podanie danych jest dobrowolne, ale niezbędne do obsługi zapytania lub rezerwacji —
+            bez ich podania nie będzie możliwy kontakt zwrotny.
+          </p>
+
+          <h3>Kontakt</h3>
+          <p>
+            W sprawach związanych z ochroną danych osobowych można kontaktować się pod adresem
+            jachimczak.klara@gmail.com.
+          </p>
+        </div>
+      </div>
+    </dialog>
+
+    <script>
+      const rodoDialog = document.getElementById("rodo-dialog") as HTMLDialogElement | null;
+
+      if (rodoDialog) {
+        document.querySelectorAll("[data-open-rodo]").forEach((link) => {
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            rodoDialog.showModal();
+          });
+        });
+
+        document.querySelectorAll("[data-close-rodo]").forEach((btn) => {
+          btn.addEventListener("click", () => rodoDialog.close());
+        });
+
+        rodoDialog.addEventListener("click", (event) => {
+          if (event.target === rodoDialog) rodoDialog.close();
+        });
+      }
+    </script>
+
+    <!-- INQUIRY MODAL (used by both lesson plans and Claire Practice) -->
+    <dialog id="inquiry-dialog" class="inquiry-dialog">
+      <form id="inquiry-form" class="inquiry-form">
+        <button type="button" class="inquiry-close" aria-label="Zamknij" data-close-inquiry>&times;</button>
+        <h3>Zarezerwuj termin</h3>
+        <p class="inquiry-sub">
+          Wybierz pakiet i zostaw swoje dane — odezwiemy się, żeby ustalić szczegóły.
+        </p>
+
+        <fieldset class="inquiry-field inquiry-radios">
+          <legend>CLAIRE PIANO</legend>
+          {plans.map((plan) => (
+            <label class="inquiry-radio">
+              <input type="radio" name="package" value={plan.name} required />
+              {plan.name} — {plan.length} / {plan.price}
+            </label>
+          ))}
+        </fieldset>
+
+        <fieldset class="inquiry-field inquiry-radios">
+          <legend>Practice</legend>
+          {practies.map((plan) => (
+            <label class="inquiry-radio">
+              <input type="radio" name="package" value={plan.name} required />
+              {plan.name} — {plan.length} / {plan.price}
+            </label>
+          ))}
+        </fieldset>
+
+        <fieldset class="inquiry-field inquiry-radios">
+          <legend>Claire Speech</legend>
+          {speechPackages.map((p) => (
+            <label class="inquiry-radio">
+              <input type="radio" name="package" value={p.name} required />
+              {p.name} — {p.length} / {p.price}
+            </label>
+          ))}
+        </fieldset>
+
+        <label class="inquiry-field">
+          Imię i nazwisko
+          <input type="text" name="name" required autocomplete="name" />
+        </label>
+
+        <label class="inquiry-field">
+          Adres e-mail
+          <input type="email" name="email" required autocomplete="email" />
+        </label>
+
+        <label class="inquiry-field">
+          Numer telefonu
+          <input type="tel" name="phone" autocomplete="tel" />
+        </label>
+
+        <label class="inquiry-consent">
+          <input type="checkbox" name="rodoConsent" required />
+          <span>
+            Wyrażam zgodę na przetwarzanie moich danych osobowych w celu obsługi zapytania,
+            zgodnie z <a href="#rodo" data-open-rodo>Polityką Prywatności (RODO)</a>.*
+          </span>
+        </label>
+
+        <button type="submit" class="cta-primary inquiry-submit">Wyślij zapytanie</button>
+      </form>
+    </dialog>
+
+    <script>
+      const dialog = document.getElementById("inquiry-dialog") as HTMLDialogElement | null;
+      const form = document.getElementById("inquiry-form") as HTMLFormElement | null;
+
+      if (dialog && form) {
+        document.querySelectorAll("[data-open-inquiry]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const pkg = btn.getAttribute("data-package");
+            const radio = form.querySelector<HTMLInputElement>(
+              `input[name="package"][value="${pkg}"]`
+            );
+            if (radio) radio.checked = true;
+            dialog.showModal();
+          });
+        });
+
+        document.querySelectorAll("[data-close-inquiry]").forEach((btn) => {
+          btn.addEventListener("click", () => dialog.close());
+        });
+
+        dialog.addEventListener("click", (event) => {
+          if (event.target === dialog) dialog.close();
+        });
+
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const data = new FormData(form);
+          const pkg = data.get("package");
+          const name = data.get("name");
+          const email = data.get("email");
+          const phone = data.get("phone");
+
+          const subject = `Zapytanie: ${pkg}`;
+          const body = [
+            `Pakiet: ${pkg}`,
+            `Imię i nazwisko: ${name}`,
+            `E-mail: ${email}`,
+            `Telefon: ${phone}`,
+            "",
+            "Proszę o kontakt w sprawie wybranego pakietu.",
+          ].join("\n");
+
+          window.location.href = `mailto:jachimczak.klara@gmail.com?subject=${encodeURIComponent(
+            subject
+          )}&body=${encodeURIComponent(body)}`;
+
+          dialog.close();
+          form.reset();
+        });
+      }
+    </script>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-row">
+      <span class="wordmark small">
+      <div class="footer-logo">
+        <img src="/claire_atelier_kolo_jednolity_sifonn.png" alt="Claire Atelier logo" />
+      </div>
+        Claire Atelier
+      </span>
+      <p>{address} · Pon-Sob 10:00–22:00</p>
+    </div>
+    <div class="footer-row">
+      <p class="footer-fine">© 2026 Claire Atelier.</p>
+      <a class="footer-fine footer-link" href="#rodo" data-open-rodo>Polityka prywatności (RODO)</a>
+      </div>
+  </footer>
+</Layout>
+
+<style>
+  /* ---------- NAV ---------- */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.1rem clamp(1.25rem, 4vw, 3rem);
+    background: var(--white);
+    border-bottom: 2px solid var(--baby-blue);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--black);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+
+  .wordmark.small {
+    font-size: 1.05rem;
+    color: var(--white);
+  }
+
+  .key-mark {
+    width: 12px;
+    height: 16px;
+    background: var(--black);
+    border-radius: 0 0 2px 2px;
+    display: inline-block;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .key-mark::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -3px;
+    width: 5px;
+    height: 9px;
+    background: var(--baby-blue-deep);
+    border-radius: 0 0 1px 1px;
+  }
+
+  .nav nav {
+    display: flex;
+    gap: clamp(1rem, 2.5vw, 2.25rem);
+  }
+
+  .nav nav a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.92rem;
+    opacity: 0.75;
+    transition: opacity 0.15s ease;
+  }
+
+  .nav nav a:hover {
+    opacity: 1;
+  }
+
+  .nav-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    border: 1px solid color-mix(in srgb, var(--black) 15%, transparent);
+    border-radius: 4px;
+    background: var(--white);
+    color: var(--ink);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    margin: 4px 0;
+    background: currentColor;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .nav-toggle[aria-expanded="true"] span:first-child {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle[aria-expanded="true"] span:last-child {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  @media (max-width: 760px) {
+    .nav {
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .nav-toggle {
+      display: block;
+      margin-left: auto;
+    }
+
+    .nav nav {
+      display: none;
+      order: 4;
+      flex: 0 0 100%;
+      flex-direction: column;
+      gap: 0;
+      padding: 0.5rem 0;
+    }
+
+    .nav nav.is-open {
+      display: flex;
+    }
+
+    .nav nav a {
+      display: block;
+      padding: 0.85rem 0.25rem;
+      border-top: 1px solid color-mix(in srgb, var(--black) 8%, transparent);
+    }
+
+    .nav .cta-small {
+      order: 3;
+    }
+  }
+
+  .cta-small {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--white);
+    background: var(--baby-blue);
+    padding: 0.55rem 0.95rem;
+    border-radius: 3px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s ease;
+  }
+
+  .cta-small:hover {
+    background: var(--baby-blue-deep);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background: var(--white);
+    color: var(--ink);
+    padding: clamp(3rem, 8vw, 5.5rem) clamp(1.25rem, 6vw, 3rem) 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-logo {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1.5px solid var(--baby-blue-deep);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--baby-blue-deep);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 8vw, 6.5rem);
+    font-weight: 500;
+    color: var(--black);
+  }
+
+  .hero h1 em {
+    color: var(--baby-blue-deep);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .hero-sub {
+    max-width: 46ch;
+    margin: 0.5rem auto 0;
+    text-align: center;
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  .hero-sub-white {
+    max-width: 46ch;
+    margin: 0.5rem auto 0;
+    text-align: center;
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    line-height: 1.55;
+    color: var(--ink-light);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.9rem;
+    margin-top: 1.5rem;
+  }
+
+  .cta-primary {
+    background: var(--black);
+    color: var(--white);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.85rem 1.6rem;
+    border-radius: 4px;
+    font-size: 0.98rem;
+    transition: background 0.15s ease, transform 0.15s ease;
+    display: inline-block;
+  }
+
+  .cta-primary:hover {
+    background: var(--black-soft);
+    transform: translateY(-1px);
+  }
+
+  .cta-ghost {
+    background: var(--black);
+    color: var(--white);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.85rem 1.6rem;
+    border-radius: 4px;
+    font-size: 0.98rem;
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+
+  .cta-ghost:hover {
+    transform: translateY(-1px);
+  }
+
+  .cta-dark {
+    background: var(--black);
+    color: var(--white);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.85rem 1.6rem;
+    border-radius: 4px;
+    font-size: 0.98rem;
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+
+  .cta-dark:hover {
+    transform: translateY(-1px);
+  }
+
+  .hero :global(.keys.hero) {
+    margin-top: 2.5rem;
+    max-width: 640px;
+    width: 100%;
+  }
+
+  .meta-line {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    padding: 1.25rem 0 2.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- SECTIONS (shared) ---------- */
+  .section {
+    padding: clamp(3rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 3rem);
+    text-align: center;
+  }
+
+  .section--black {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  .section--white {
+    background: var(--white);
+    color: var(--ink);
+  }
+
+  .section--mist {
+    background: var(--mist);
+    color: var(--ink-light);
+  }
+
+  .section h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .section h2.accent {
+    color: var(--ink-light);
+  }
+
+  .section-sub {
+    text-align: center;
+    max-width: 50ch;
+    margin: 0.75rem auto 0;
+    opacity: 0.7;
+    font-size: 1rem;
+  }
+
+  .section-piano-practice {
+    margin-bottom: 0;
+    background: #fdecec;
+  }
+
+  .section--practice {
+    background: #fdecec;
+    color: var(--ink-light);
+  }
+
+  .section-more {
+    margin-top: 0;
+  }
+  .more-section {
+    padding-top: 0;
+  }
+  /* ---------- OFFER NOTE ---------- */
+  .offer-note {
+    text-align: center;
+    max-width: 50ch;
+    margin: 2.5rem auto 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid color-mix(in srgb, var(--black) 10%, transparent);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.01em;
+    color: var(--ink-soft);
+  }
+
+  .offer-note strong {
+    color: var(--baby-blue-deep);
+    font-weight: 600;
+  }
+
+  /* ---------- PRINCIPLES / PACKAGES ---------- */
+  .principles {
+    max-width: 1000px;
+    margin: 2.5rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .principle h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+    color: var(--black);
+  }
+
+  .principle p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink-light);
+  }
+
+  @media (max-width: 780px) {
+    .principles {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+  }
+
+  /* ---------- SPEECH: DLA KOGO ---------- */
+  #dla-kogo-speech,
+  #dla-kogo-speech .principle h2,
+  #dla-kogo-speech .principle p { color: var(--black); }
+
+  #dla-kogo-speech .principle h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .speech-body { text-align: left; }
+  .speech-body :global(p) { margin: 0 0 0.9rem; line-height: 1.6; color: var(--black); }
+  .speech-body :global(.lead) { font-weight: 600; font-size: 1.05rem; }
+  .speech-body :global(ul) { margin: 0 0 0.9rem; padding-left: 1.2rem; }
+  .speech-body :global(li) { margin-bottom: 0.3rem; line-height: 1.5; color: var(--black); }
+  .speech-body :global(.quotes) { list-style: none; padding-left: 0; font-style: italic; }
+  .speech-body :global(.effect) { margin-top: 1.25rem; }
+
+  /* ---------- PACKAGE COMPARISON ---------- */
+  .package-grid {
+    max-width: 1100px;
+    margin: 2.5rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+    text-align: left;
+  }
+
+  .package-card {
+    background: var(--white);
+    border: 1.5px solid color-mix(in srgb, var(--black) 12%, transparent);
+    border-radius: 8px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .package-card--solo {
+    border-top: 3px solid var(--baby-blue-deep);
+  }
+
+  .package-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--black);
+  }
+
+  .package-tagline {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 1.25rem;
+    min-height: 2.7em;
+  }
+
+  .package-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  .package-table th {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--baby-blue-deep);
+    padding: 0 0.4rem 0.55rem 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--black) 12%, transparent);
+  }
+
+  .package-table td {
+    padding: 0.6rem 0.4rem 0.6rem 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--black) 8%, transparent);
+    vertical-align: top;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+
+  .package-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .package-tier-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .package-savings {
+    display: block;
+    margin-top: 0.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--baby-blue-deep);
+  }
+
+  @media (max-width: 900px) {
+    .package-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- PRICING ---------- */
+  .plans {
+    max-width: 1000px;
+    margin: 2.5rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: stretch;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+  }
+ .plans > div {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .plans> div:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+  }
+
+  .practices {
+    max-width: 760px;
+    margin: 3rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    align-items: stretch;
+    padding: 0 1.5rem;
+  }
+
+  .practices > div {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .practices > div:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+  }
+
+.plan {
+    background: var(--white);
+    border: 1.5px solid color-mix(in srgb, var(--black) 14%, transparent);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 6px;
+  }
+
+  .plan--highlight {
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
+  }
+
+  .plan-length {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    opacity: 0.6;
+  }
+
+  .plan h3 {
+    font-size: 1.35rem;
+    font-weight: 500;
+    margin: 0.15rem 0 0.1rem;
+  }
+
+  .plan-price {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--baby-blue-deep);
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .plan-price-old {
+    font-size: 0.8rem;
+    opacity: 0.5;
+    text-decoration: line-through;
+  }
+
+  .plan--highlight .plan-price {
+    color: var(--baby-blue);
+  }
+
+  .plan-detail {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    opacity: 0.85;
+    flex-grow: 1;
+    margin-bottom: 1.25rem;
+  }
+
+  .plan .cta-primary,
+  .plan .cta-ghost {
+    text-align: center;
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .plan--highlight .cta-primary {
+    background: var(--baby-blue);
+    color: var(--black);
+  }
+
+  .plan--highlight .cta-primary:hover {
+    background: var(--baby-blue-deep);
+  }
+
+  @media (max-width: 780px) {
+    .plans {
+      grid-template-columns: 1fr;
+      flex-direction: column; /* .plans is display:flex, so stack cards on mobile */
+    }
+  }
+
+  /* ---------- VOUCHERS ---------- */
+  .voucher-tiles {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .voucher-tile {
+    flex: 1;
+    min-width: 240px;
+    max-width: 350px;
+    padding: 0;
+    overflow: hidden;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    background: var(--white);
+    cursor: pointer;
+    color: var(--ink);
+    text-align: left;
+    transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+
+  .voucher-tile-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .voucher-tile-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    padding: 1.2rem;
+  }
+
+  .voucher-tile-hint {
+    margin-top: 0.35rem;
+    color: var(--baby-blue-deep);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .voucher-detail-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 220px) 1fr;
+    gap: 1.25rem;
+    align-items: center;
+  }
+
+  .voucher-detail-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .voucher-detail-title { margin: 0 0 0.5rem; }
+  .voucher-detail-copy p { margin: 0; line-height: 1.65; }
+
+  .voucher-tile:hover,
+  .voucher-tile.active {
+    border-color: var(--baby-blue-deep);
+    transform: translateY(-2px);
+  }
+
+  .voucher-tile.active { background: #f0f7ff; }
+  .voucher-tile-title { font-weight: 500; margin: 0; }
+  .voucher-tile-sub { font-size: 0.9rem; opacity: 0.75; }
+  .voucher-tile:hover,
+  .voucher-tile:focus-visible { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); }
+
+  @media (max-width: 600px) {
+    .voucher-detail-layout { grid-template-columns: 1fr; }
+    .voucher-detail-image { max-height: 220px; }
+  }
+
+  .voucher-panel {
+    max-width: 700px;
+    margin: 1.5rem auto 0;
+    padding: 1.5rem;
+    background: var(--white);
+    border: 1.5px solid var(--baby-blue-deep);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .voucher-panel[hidden] { display: none; }
+  .voucher-panel-title { font-weight: 600; color: var(--black); }
+
+  .voucher-group-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--baby-blue-deep);
+    margin-bottom: 0.5rem;
+  }
+
+  .voucher-options {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- LOCATION / MAP ---------- */
+  .location-layout {
+    max-width: 1080px;
+    margin: 2.5rem auto 0;
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 2.5rem;
+    align-items: start;
+    text-align: left;
+  }
+
+  .location-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .location-info dl {
+    margin: 0;
+    display: grid;
+    row-gap: 0.9rem;
+  }
+
+  .location-info dt {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--baby-blue);
+    margin-bottom: 0.15rem;
+  }
+
+  .location-info dd {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: color-mix(in srgb, var(--white) 88%, transparent);
+  }
+
+  .location-info .cta-primary {
+    background: var(--baby-blue);
+    color: var(--black);
+    width: fit-content;
+  }
+
+  .location-info .cta-primary:hover {
+    background: var(--baby-blue-deep);
+  }
+
+  .location-map {
+    border: 2px solid var(--baby-blue);
+    border-radius: 6px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+  }
+
+  .location-map iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    filter: grayscale(0.15) contrast(1.02);
+  }
+
+  @media (max-width: 820px) {
+    .location-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- FINAL CTA BAND ---------- */
+  .section--band {
+    background: var(--baby-blue);
+    color: var(--black);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .section--band :global(.keys.divider) {
+    max-width: 480px;
+    width: 100%;
+  }
+
+  .section--band h2 {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+  }
+
+  .band-sub {
+    max-width: 46ch;
+    opacity: 0.85;
+    line-height: 1.6;
+    margin: 0 auto;
+  }
+
+  /* ---------- FOOTER ---------- */
+  .footer {
+    background: var(--black);
+    color: color-mix(in srgb, var(--white) 65%, transparent);
+    padding: 2rem clamp(1.25rem, 6vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .footer-row p {
+    font-size: 0.85rem;
+  }
+
+  .footer-fine {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    opacity: 0.55;
+  }
+
+  .footer-link {
+    text-decoration: underline;
+    color: inherit;
+    opacity: 0.7;
+  }
+
+  .footer-link:hover {
+    opacity: 1;
+  }
+
+  .main-logo {
+    max-width: 7%;
+    height: auto;
+  }
+  .footer-logo {
+    max-width: 2%;
+    height: auto;
+  }
+
+  /* ---------- ABOUT / EVENTS ---------- */
+  .about {
+    max-width: 640px;
+    margin: 2.5rem auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  .about-lead {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  .about-lead strong {
+    color: var(--black);
+  }
+
+  .about-lead em {
+    color: var(--baby-blue-deep);
+    font-style: normal;
+  }
+
+  .school-events {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    color: var(--black);
+  }
+
+  .school-events li {
+    position: relative;
+    padding-left: 1.4rem;
+  }
+
+  .school-events li::before {
+    content: "♪";
+    position: absolute;
+    left: 0;
+    color: var(--baby-blue-deep);
+  }
+
+  /* ---------- INQUIRY MODAL ---------- */
+  .inquiry-dialog {
+    border: none;
+    border-radius: 10px;
+    padding: 0;
+    max-width: 420px;
+    width: calc(100% - 2rem);
+    color: var(--ink);
+    background: var(--white);
+    box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.35);
+  }
+
+  .inquiry-dialog::backdrop {
+    background: color-mix(in srgb, var(--black) 55%, transparent);
+  }
+
+  .inquiry-form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding: 2rem 1.75rem 1.75rem;
+    text-align: left;
+  }
+
+  .inquiry-form h3 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 0;
+    padding-right: 1.5rem;
+  }
+
+  .inquiry-sub {
+    margin: -0.5rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    opacity: 0.75;
+  }
+
+  .inquiry-close {
+    position: absolute;
+    top: 0.9rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--ink-soft);
+    cursor: pointer;
+    padding: 0.2rem;
+  }
+
+  .inquiry-close:hover {
+    color: var(--black);
+  }
+
+  .inquiry-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .inquiry-field input {
+    font-family: inherit;
+    font-size: 0.95rem;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--ink);
+    padding: 0.65rem 0.75rem;
+    border: 1.5px solid color-mix(in srgb, var(--black) 16%, transparent);
+    border-radius: 5px;
+    background: var(--white);
+  }
+
+  .inquiry-field textarea {
+    font-family: inherit;
+    font-size: 0.95rem;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--ink);
+    padding: 0.65rem 0.75rem;
+    border: 1.5px solid color-mix(in srgb, var(--black) 16%, transparent);
+    border-radius: 5px;
+    background: var(--white);
+    resize: vertical;
+  }
+
+  .inquiry-field input:focus,
+  .inquiry-field textarea:focus {
+    outline: none;
+    border-color: var(--baby-blue-deep);
+  }
+
+  .inquiry-radios legend {
+    font-family: var(--font-display, inherit);
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--black);
+    padding: 0 0 0.5rem;
+  }
+
+  .inquiry-radio {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-display, inherit);
+    font-size: 0.82rem;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--ink-soft);
+    padding: 0.15rem 0;
+  }
+
+  .inquiry-radio input {
+    accent-color: var(--baby-blue-deep);
+    width: 16px;
+    height: 16px;
+  }
+
+  .inquiry-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-family: inherit;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--ink-soft);
+  }
+
+  .inquiry-consent input {
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    accent-color: var(--baby-blue-deep);
+    width: 16px;
+    height: 16px;
+  }
+
+  .inquiry-consent a {
+    color: var(--baby-blue-deep);
+    text-decoration: underline;
+  }
+
+  .inquiry-submit {
+    margin-top: 0.4rem;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-list {
+    max-width: 640px;
+    margin: 2.5rem auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: left;
+  }
+
+  .faq-item {
+    background: var(--white);
+    border: 1.5px solid color-mix(in srgb, var(--black) 12%, transparent);
+    border-radius: 8px;
+    padding: 0.25rem 1.25rem;
+  }
+
+  .faq-item[open] {
+    border-color: var(--baby-blue-deep);
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0;
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--black);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--baby-blue-deep);
+    transition: transform 0.15s ease;
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    margin: 0 0 1.1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  .faq-ask-btn {
+    margin-top: 2rem;
+  }
+
+  /* ---------- RODO / PRIVACY POLICY MODAL ---------- */
+  .rodo-dialog {
+    max-width: 560px;
+    max-height: 80vh;
+  }
+
+  .rodo-form {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .rodo-form h3:first-of-type {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 0 0 1.2rem;
+    padding-right: 1.5rem;
+  }
+
+  .rodo-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .rodo-content h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--black);
+    margin: 0 0 0.35rem;
+  }
+
+  .rodo-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- PIANO / SPEECH TOGGLE ---------- */
+  .toggle-blocks-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .toggle-block {
+    flex: 1;
+    max-width: 350px;
+    padding: 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #ffffff;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    color: #333;
+  }
+
+  .toggle-block:hover:not(:disabled) {
+    border-color: var(--baby-blue-deep);
+    transform: translateY(-2px);
+  }
+
+  .toggle-block.active {
+    border-color: var(--baby-blue-deep);
+    background-color: #f0f7ff;
+    cursor: default;
+  }
+
+  .toggle-block.active h2 {
+    color: var(--baby-blue-deep);
+  }
+
+  .content-section.hidden {
+    display: none !important;
+  }
+
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .content-section {
+    width: 100%;
+  }
+
+  /* ---------- CLAIRE SPEECH ---------- */
+  .speech-list,
+  .speech-quotes {
+    max-width: 50ch;
+    margin: 1.5rem auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .speech-list p { opacity: 0.85; }
+
+  .speech-quotes p {
+    font-style: italic;
+    color: var(--ink-light);
+  }
+
+  .speech-program-details {
+    max-width: 700px;
+    margin: 2rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+
+  .speech-groups {
+    max-width: 700px;
+    margin: 2rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  #section-speech h3 { margin-top: 1.75rem; }
+
+  @media (max-width: 780px) {
+    .speech-groups { grid-template-columns: 1fr; }
+  }
+
+</style>
