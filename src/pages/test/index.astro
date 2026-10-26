@@ -253,23 +253,30 @@ const faqs = [
       mainNavigation.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => {
         link.addEventListener("click", (event) => {
           const section = link.dataset.navSection;
+          const target = link.getAttribute("href");
           if (section) {
             event.preventDefault();
             const toggle = document.querySelector<HTMLButtonElement>(
               section === "speech" ? '[data-target="#section-speech"]' : '[data-target="#section-piano"]'
             );
             if (toggle && !toggle.classList.contains("active")) toggle.click();
-            const target = link.getAttribute("href");
-            if (target === "#practice") {
-              window.setTimeout(() => document.querySelector("#practice")?.scrollIntoView({ behavior: "smooth" }), 0);
-            } else {
-              document.querySelector("#piano-speech-tiles")?.scrollIntoView({ behavior: "smooth" });
-            }
           }
 
+          // Close the dropdown first, then offset the scroll by the actual sticky header height.
           mainNavigation.classList.remove("is-open");
           navToggle.setAttribute("aria-expanded", "false");
           navToggle.setAttribute("aria-label", "Otwórz menu");
+
+          if (section && target) {
+            window.setTimeout(() => {
+              const destination = document.querySelector<HTMLElement>(target);
+              const header = document.querySelector<HTMLElement>(".nav");
+              if (!destination) return;
+              const headerHeight = header?.getBoundingClientRect().height ?? 0;
+              const top = destination.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+              window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+            }, 60);
+          }
         });
       });
     }
@@ -870,7 +877,7 @@ const faqs = [
             >
               <img class="voucher-tile-image" src={v.image} alt={v.imageAlt} loading="lazy" />
               <span class="voucher-tile-copy">
-                <span class="voucher-tile-title">{v.title}</span>
+                <h3 class="voucher-detail-title">{v.title}</h3>
                 <span class="voucher-tile-sub">{v.sub}</span>
                 <span class="voucher-tile-hint">Kliknij, aby poznać szczegóły</span>
               </span>
@@ -1385,8 +1392,8 @@ Zapisz się. Zacznij
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.5rem;
-    padding: 1.1rem clamp(1.25rem, 4vw, 3rem);
+    gap: 1rem;
+    padding: 0.75rem clamp(1rem, 4vw, 3rem);
     background: var(--white);
     border-bottom: 2px solid var(--baby-blue);
     position: sticky;
@@ -1395,9 +1402,11 @@ Zapisz się. Zacznij
   }
 
   .wordmark {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.55rem;
+    flex: 0 1 auto;
+    min-width: 0;
     font-family: var(--font-display);
     font-weight: 600;
     font-size: 1.25rem;
@@ -1409,6 +1418,22 @@ Zapisz się. Zacznij
   .wordmark.small {
     font-size: 1.05rem;
     color: var(--white);
+  }
+
+  .main-logo {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main-logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   .key-mark {
@@ -1432,47 +1457,38 @@ Zapisz się. Zacznij
     border-radius: 0 0 1px 1px;
   }
 
-  .nav nav {
-    display: flex;
-    gap: clamp(1rem, 2.5vw, 2.25rem);
-  }
-
-  .nav nav a {
-    color: var(--ink);
-    text-decoration: none;
-    font-size: 0.92rem;
-    opacity: 0.75;
-    transition: opacity 0.15s ease;
-  }
-
-  .nav nav a:hover {
-    opacity: 1;
-  }
-
   .nav-toggle {
-    display: none;
+    order: 3;
+    margin-left: auto;
+    display: flex;
+    flex: 0 0 44px;
     width: 44px;
     height: 44px;
     padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin: 0;
     border: 1px solid color-mix(in srgb, var(--black) 15%, transparent);
     border-radius: 4px;
     background: var(--white);
     color: var(--ink);
     cursor: pointer;
-    flex-shrink: 0;
+    align-self: center;
   }
 
   .nav-toggle span {
     display: block;
-    height: 2px;
     width: 100%;
-    margin: 4px 0;
+    height: 2px;
+    margin: 0;
     background: currentColor;
     transition: transform 0.2s ease, opacity 0.2s ease;
   }
 
   .nav-toggle[aria-expanded="true"] span:first-child {
-    transform: translateY(6px) rotate(45deg);
+    transform: translateY(7px) rotate(45deg);
   }
 
   .nav-toggle[aria-expanded="true"] span:nth-child(2) {
@@ -1480,31 +1496,70 @@ Zapisz się. Zacznij
   }
 
   .nav-toggle[aria-expanded="true"] span:last-child {
-    transform: translateY(-6px) rotate(-45deg);
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .nav nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 1.5rem;
+    padding: 1rem clamp(1rem, 4vw, 3rem);
+    background: var(--white);
+    border-bottom: 2px solid var(--baby-blue);
+    box-shadow: 0 10px 20px rgb(0 0 0 / 8%);
+  }
+
+  .nav nav.is-open {
+    display: flex;
+  }
+
+  .nav nav a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.92rem;
+    opacity: 0.8;
+    transition: opacity 0.15s ease;
+    padding: 0.65rem 0.25rem;
+  }
+
+  .nav nav a:hover {
+    opacity: 1;
   }
 
   @media (max-width: 760px) {
     .nav {
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.5rem;
+      padding-top: 0.6rem;
+      padding-bottom: 0.6rem;
+    }
+
+    .wordmark {
+      font-size: 1.1rem;
+    }
+
+    .main-logo {
+      width: 40px;
+      height: 40px;
+      flex-basis: 40px;
     }
 
     .nav-toggle {
-      display: block;
       margin-left: auto;
     }
 
     .nav nav {
-      display: none;
-      order: 4;
-      flex: 0 0 100%;
       flex-direction: column;
+      align-items: stretch;
       gap: 0;
-      padding: 0.5rem 0;
-    }
-
-    .nav nav.is-open {
-      display: flex;
+      padding: 0.5rem 1rem;
     }
 
     .nav nav a {
@@ -1514,11 +1569,12 @@ Zapisz się. Zacznij
     }
 
     .nav .cta-small {
-      order: 3;
+      order: 2;
     }
   }
 
   .cta-small {
+    order: 2;
     font-family: var(--font-mono);
     font-size: 0.8rem;
     color: var(--white);
@@ -1530,8 +1586,15 @@ Zapisz się. Zacznij
     transition: background 0.15s ease;
   }
 
+  .cta-small,
+  .nav nav a.cta-small {
+    color: #fff;
+    opacity: 1;
+  }
+
   .cta-small:hover {
     background: var(--baby-blue-deep);
+    color: #fff;
   }
 
   /* ---------- HERO ---------- */
@@ -2040,10 +2103,14 @@ Zapisz się. Zacznij
   /* ---------- VOUCHERS ---------- */
   .voucher-tiles {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
+    /* Keep voucher cards a sensible size on wide screens; let columns shrink before stacking. */
+    grid-template-columns: repeat(2, minmax(0, 420px));
+    justify-content: center;
+    gap: clamp(0.75rem, 2vw, 1.25rem);
     align-items: start;
-    margin-top: 2rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 2rem auto 0;
   }
 
   .voucher-card {
@@ -2082,8 +2149,12 @@ Zapisz się. Zacznij
   .voucher-tile-image {
     display: block;
     width: 100%;
+    height: auto;
+    max-height: 280px;
     aspect-ratio: 4 / 3;
     object-fit: cover;
+    object-position: center;
+    background: #fff;
   }
 
   .voucher-tile-copy {
@@ -2133,7 +2204,18 @@ Zapisz się. Zacznij
   .voucher-tile:focus-visible { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); }
 
   @media (max-width: 700px) {
-    .voucher-tiles { grid-template-columns: 1fr; }
+    .voucher-tiles {
+      grid-template-columns: minmax(0, 1fr);
+      max-width: 440px;
+    }
+
+    .voucher-tile-copy {
+      padding: clamp(0.8rem, 3vw, 1.2rem);
+    }
+
+    .voucher-panel {
+      padding: 0 clamp(0.8rem, 3vw, 1.2rem) 1.2rem;
+    }
   }
 
   .voucher-panel {
@@ -2164,9 +2246,17 @@ Zapisz się. Zacznij
 
   .voucher-options {
     display: flex;
-    gap: 0.75rem;
+    gap: 0.5rem;
     justify-content: center;
     flex-wrap: wrap;
+    min-width: 0;
+  }
+
+  .voucher-options .cta-ghost {
+    max-width: 100%;
+    padding: 0.65rem clamp(0.75rem, 2vw, 1.2rem);
+    font-size: clamp(0.82rem, 1.5vw, 0.95rem);
+    white-space: normal;
   }
 
   /* ---------- LOCATION / MAP ---------- */
@@ -2303,10 +2393,6 @@ Zapisz się. Zacznij
     opacity: 1;
   }
 
-  .main-logo {
-    max-width: 7%;
-    height: auto;
-  }
   .footer-logo {
     max-width: 2%;
     height: auto;
