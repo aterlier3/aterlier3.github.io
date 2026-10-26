@@ -1264,6 +1264,9 @@ Zapisz się. Zacznij
             <label class="inquiry-radio">
               <input type="radio" name="package" value={plan.name} required />
               {plan.name} — {plan.length} / {plan.price}
+              {plan.oldPrice && (
+                <s class="plan-price-old">{plan.oldPrice}</s>
+              )}
             </label>
           ))}
         </fieldset>
