@@ -153,7 +153,7 @@ const vouchers = [
     id: "piano",
     title: "VOUCHER PIANO",
     sub: "Lekcje pianina w prezencie",
-    image: "piano-voucher.png",
+    image: `${import.meta.env.BASE_URL}images/piano-voucher.png`,
     imageAlt: "Voucher prezentowy na lekcje pianina",
     details: "Podaruj bliskiej osobie czas z muzyką i lekcje pianina dopasowane do jej poziomu. Wybierz liczbę lekcji oraz formę zajęć.",
     panelTitle: "Wybierz liczbę lekcji i formę zajęć",
@@ -166,7 +166,7 @@ const vouchers = [
     id: "speech",
     title: "VOUCHER SPEECH",
     sub: "Zajęcia Claire Speech w prezencie",
-    image: "speech-voucher.png",
+    image: `${import.meta.env.BASE_URL}images/speech-voucher.png`,
     imageAlt: "Voucher prezentowy na zajęcia Claire Speech",
     details: "Podaruj pewniejszy głos, swobodniejszą komunikację i rozwój umiejętności pracy z głosem. Wybierz zajęcia grupowe lub indywidualne.",
     panelTitle: "Wybierz rodzaj zajęć",
@@ -860,52 +860,49 @@ const faqs = [
 
       <div class="voucher-tiles">
         {vouchers.map((v) => (
-          <button
-            type="button"
-            class="voucher-tile"
-            data-voucher-tile={v.id}
-            aria-expanded="false"
-            aria-controls={`voucher-panel-${v.id}`}
-          >
-            <img class="voucher-tile-image" src={v.image} alt={v.imageAlt} loading="lazy" />
-            <span class="voucher-tile-copy">
-              <span class="voucher-tile-title">{v.title}</span>
-              <span class="voucher-tile-sub">{v.sub}</span>
-              <span class="voucher-tile-hint">Kliknij, aby poznać szczegóły</span>
-            </span>
-          </button>
+          <article class="voucher-card">
+            <button
+              type="button"
+              class="voucher-tile"
+              data-voucher-tile={v.id}
+              aria-expanded="false"
+              aria-controls={`voucher-panel-${v.id}`}
+            >
+              <img class="voucher-tile-image" src={v.image} alt={v.imageAlt} loading="lazy" />
+              <span class="voucher-tile-copy">
+                <span class="voucher-tile-title">{v.title}</span>
+                <span class="voucher-tile-sub">{v.sub}</span>
+                <span class="voucher-tile-hint">Kliknij, aby poznać szczegóły</span>
+              </span>
+            </button>
+            <div class="voucher-panel" id={`voucher-panel-${v.id}`} hidden>
+              <div class="voucher-detail-copy">
+              <br>
+                <h3 class="voucher-detail-title">{v.title}</h3>
+                <p>{v.details}</p>
+              </div>
+              <p class="voucher-panel-title">{v.panelTitle}</p>
+              {v.groups.map((g) => (
+                <div class="voucher-group">
+                  <span class="voucher-group-label">{g.label}</span>
+                  <div class="voucher-options">
+                    {g.options.map((o) => (
+                      <button
+                        type="button"
+                        class="cta-ghost"
+                        data-open-voucher
+                        data-voucher={`${v.title} — ${g.label} — ${o}`}
+                      >
+                        {o}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </article>
         ))}
       </div>
-
-      {vouchers.map((v) => (
-        <div class="voucher-panel" id={`voucher-panel-${v.id}`} hidden>
-          <div class="voucher-detail-layout">
-            <img class="voucher-detail-image" src={v.image} alt={v.imageAlt} loading="lazy" />
-            <div class="voucher-detail-copy">
-              <h3 class="voucher-detail-title">{v.title}</h3>
-              <p>{v.details}</p>
-            </div>
-          </div>
-          <p class="voucher-panel-title">{v.panelTitle}</p>
-          {v.groups.map((g) => (
-            <div class="voucher-group">
-              <span class="voucher-group-label">{g.label}</span>
-              <div class="voucher-options">
-                {g.options.map((o) => (
-                  <button
-                    type="button"
-                    class="cta-ghost"
-                    data-open-voucher
-                    data-voucher={`${v.title} — ${g.label} — ${o}`}
-                  >
-                    {o}
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      ))}
     </section>
 
     <!-- VOUCHER MODAL -->
@@ -954,21 +951,23 @@ const faqs = [
     </dialog>
 
     <script>
-      // tiles -> unfold panels
-      const voucherTiles = document.querySelectorAll("[data-voucher-tile]");
-      const voucherPanels = document.querySelectorAll(".voucher-panel") as NodeListOf<HTMLElement>;
+      // Expand offer details inside the clicked voucher card.
+      const voucherTiles = document.querySelectorAll<HTMLButtonElement>("[data-voucher-tile]");
+      const voucherPanels = document.querySelectorAll<HTMLElement>(".voucher-panel");
 
       voucherTiles.forEach((tile) => {
         tile.addEventListener("click", () => {
           const id = tile.getAttribute("data-voucher-tile");
-          const panel = document.getElementById(`voucher-panel-${id}`);
+          const panel = id ? document.getElementById(`voucher-panel-${id}`) : null;
           if (!panel) return;
+
           const willOpen = panel.hidden;
-          voucherPanels.forEach((p) => (p.hidden = true));
-          voucherTiles.forEach((t) => {
-            t.classList.remove("active");
-            t.setAttribute("aria-expanded", "false");
+          voucherPanels.forEach((item) => (item.hidden = true));
+          voucherTiles.forEach((item) => {
+            item.classList.remove("active");
+            item.setAttribute("aria-expanded", "false");
           });
+
           if (willOpen) {
             panel.hidden = false;
             tile.classList.add("active");
@@ -2040,17 +2039,35 @@ Zapisz się. Zacznij
 
   /* ---------- VOUCHERS ---------- */
   .voucher-tiles {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    align-items: start;
     margin-top: 2rem;
-    flex-wrap: wrap;
+  }
+
+  .voucher-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    background: var(--white);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .voucher-card:has(.voucher-tile.active) {
+    border-color: var(--baby-blue-deep);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   }
 
   .voucher-tile {
-    flex: 1;
-    min-width: 240px;
-    max-width: 350px;
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+    background: var(--white);
     padding: 0;
     overflow: hidden;
     border: 2px solid #e0e0e0;
@@ -2094,8 +2111,12 @@ Zapisz się. Zacznij
   .voucher-detail-image {
     display: block;
     width: 100%;
+    height: auto;
+    max-height: 360px;
     aspect-ratio: 4 / 3;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
+    background: #fff;
     border-radius: 8px;
   }
 
@@ -2104,34 +2125,31 @@ Zapisz się. Zacznij
 
   .voucher-tile:hover,
   .voucher-tile.active {
-    border-color: var(--baby-blue-deep);
-    transform: translateY(-2px);
+    background: #f0f7ff;
   }
-
-  .voucher-tile.active { background: #f0f7ff; }
   .voucher-tile-title { font-weight: 500; margin: 0; }
   .voucher-tile-sub { font-size: 0.9rem; opacity: 0.75; }
   .voucher-tile:hover,
   .voucher-tile:focus-visible { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); }
 
-  @media (max-width: 600px) {
-    .voucher-detail-layout { grid-template-columns: 1fr; }
-    .voucher-detail-image { max-height: 220px; }
+  @media (max-width: 700px) {
+    .voucher-tiles { grid-template-columns: 1fr; }
   }
 
   .voucher-panel {
-    max-width: 700px;
-    margin: 1.5rem auto 0;
-    padding: 1.5rem;
-    background: var(--white);
-    border: 1.5px solid var(--baby-blue-deep);
-    border-radius: 8px;
+    padding: 0 1.2rem 1.4rem;
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
+    animation: voucher-reveal 0.22s ease-out;
   }
 
   .voucher-panel[hidden] { display: none; }
+
+  @keyframes voucher-reveal {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
   .voucher-panel-title { font-weight: 600; color: var(--black); }
 
   .voucher-group-label {
