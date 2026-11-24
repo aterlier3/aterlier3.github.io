@@ -1,0 +1,154 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const home = import.meta.env.BASE_URL;
+const email = "jachimczak.klara@gmail.com";
+
+// Dodawanie kolejnych ofert (np. vouchery firmowe) = dopisanie obiektu tutaj.
+const offers = [
+  {
+    kicker: "Claire Piano",
+    title: "Muzyka, która pozwala złapać oddech",
+    sub: "Pakiety lekcji gry na pianinie dla pracowników",
+    body: [
+      "Chcesz zadbać o produktywność swojego zespołu? Zacznij od stworzenia przestrzeni na odpoczynek i rozwijanie pasji.",
+      "Gra na pianinie pozwala oderwać się od codziennych obowiązków, skupić na czymś nowym i czerpać satysfakcję z własnych postępów. To czas, który pracownik może poświęcić sobie – niezależnie od tego, czy dopiero zaczyna swoją przygodę z muzyką, czy chce do niej wrócić po latach.",
+    ],
+    closing: "Wykup pakiet lekcji gry na pianinie i podaruj swoim pracownikom benefit, który zostaje z nimi na dłużej.",
+  },
+  {
+    kicker: "Claire Speech",
+    title: "Głos, który robi wrażenie",
+    sub: "Pakiety zajęć Claire Speech",
+    body: [
+      "Twój zespół prowadzi spotkania, prezentuje pomysły, rozmawia z klientami lub występuje w mediach społecznościowych? Pomóż pracownikom zadbać o narzędzie, z którego korzystają każdego dnia – głos.",
+      "Zajęcia Claire Speech to przestrzeń do pracy nad sposobem mówienia i pewnością siebie w komunikacji. Mogą wesprzeć osoby, które chcą swobodniej zabierać głos podczas spotkań, występować przed kamerą i skuteczniej prezentować siebie oraz swoją firmę.",
+    ],
+    closing: "Wykup pakiet zajęć Claire Speech i pomóż swojemu zespołowi mówić z większą pewnością.",
+  },
+];
+---
+
+<Layout>
+  <header class="nav">
+    <a class="wordmark" href={home}>
+      <div class="main-logo">
+        <img src="/claire_atelier_kolo_jednolity_sifonn.png" alt="Claire Atelier logo" />
+      </div>
+      Claire Atelier
+    </a>
+    <nav aria-label="Nawigacja główna">
+      <a href={home}>← Strona główna</a>
+      <a class="cta-small" href={`mailto:${email}?subject=Oferta%20dla%20firm`}>Napisz do nas</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section id="business" class="section section--mist section--business">
+      <h1>OFERTA DLA FIRM</h1>
+      <p class="business-headline">Zadbaj o ludzi, którzy tworzą Twoją firmę</p>
+      <p class="section-sub business-intro">
+        Dobre pomysły, skuteczna komunikacja i zaangażowanie zaczynają się od ludzi. Daj swoim pracownikom przestrzeń, w której zadbają o swój głos, rozwiną pewność siebie i znajdą chwilę na regenerację.
+      </p>
+      <p class="section-sub business-intro">
+        W Claire Atelier łączymy muzykę, rozwój i edukację. Tworzymy zajęcia oraz szkolenia dla firm, które chcą inwestować w kompetencje i dobre samopoczucie swoich zespołów.
+      </p>
+
+      <div class="business-grid">
+        {offers.map((o) => (
+          <article class="business-card">
+            <span class="business-kicker">{o.kicker}</span>
+            <h3>{o.title}</h3>
+            <p class="business-card-sub">{o.sub}</p>
+            {o.body.map((p) => <p>{p}</p>)}
+            <p><strong>{o.closing}</strong></p>
+          </article>
+        ))}
+      </div>
+
+      <div class="business-custom">
+        <h3>Szkolenie dopasowane do Twojej firmy</h3>
+        <p>Każdy zespół ma inne potrzeby, dlatego porozmawiajmy o tym, co sprawdzi się właśnie u Was. Prowadzimy szkolenia w naszej placówce, w siedzibie Państwa firmy lub online.</p>
+        <p>Szukasz ciekawego benefitu dla pracowników? Chcesz zorganizować szkolenie dla zespołu? A może masz własny pomysł na współpracę?</p>
+        <p>Napisz do nas i opowiedz, czego potrzebujesz. Chętnie przedstawimy szczegóły i wspólnie stworzymy ofertę dla Twojej firmy.</p>
+        <p class="business-closing"><em>Zainwestuj w rozwój, który słychać i czuć.</em></p>
+        <!-- <a class="cta-primary" href={`mailto:${email}?subject=Oferta%20dla%20firm`}>Skontaktuj się z nami →</a> -->
+      </div>
+    </section>
+
+    <!-- Tu później: <section id="vouchery-firmowe"> ... </section> -->
+
+    <section id="contact" class="section section--band">
+      <div class="main-logo"><img src="/claire_atelier_kolo_jednolity_sifonn.png" alt="Claire Atelier logo" /></div>
+      <h2>Porozmawiajmy o współpracy</h2>
+      <a class="cta-dark" href={`mailto:${email}?subject=Oferta%20dla%20firm`}>Napisz do nas</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-row">
+      <span class="wordmark small">
+        <div class="footer-logo"><img src="/claire_atelier_kolo_jednolity_sifonn.png" alt="Claire Atelier logo" /></div>
+        Claire Atelier
+      </span>
+      <p>aleja Grunwaldzka 212/2 Gdańsk · Pon-Sob 10:00–22:00</p>
+    </div>
+    <div class="footer-row">
+      <p class="footer-fine">© 2026 Claire Atelier.</p>
+      <a class="footer-fine footer-link" href={home}>Strona główna</a>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  /* NAV (wersja uproszczona, bez hamburgera) */
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem clamp(1rem, 4vw, 3rem); background: var(--white); border-bottom: 2px solid var(--baby-blue); position: sticky; top: 0; z-index: 10; }
+  .nav nav { display: flex; align-items: center; gap: 1rem 1.5rem; flex-wrap: wrap; }
+  .nav nav a { color: var(--ink); text-decoration: none; font-size: 0.92rem; opacity: 0.8; }
+  .nav nav a:hover { opacity: 1; }
+  .wordmark { display: inline-flex; align-items: center; gap: 0.55rem; font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; color: var(--black); text-decoration: none; letter-spacing: 0.01em; }
+  .wordmark.small { font-size: 1.05rem; color: var(--white); }
+  .main-logo { width: 44px; height: 44px; flex: 0 0 44px; display: flex; align-items: center; justify-content: center; }
+  .main-logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .cta-small, .nav nav a.cta-small { font-family: var(--font-mono); font-size: 0.8rem; color: #fff; background: var(--baby-blue); padding: 0.55rem 0.95rem; border-radius: 3px; text-decoration: none; white-space: nowrap; opacity: 1; transition: background 0.15s ease; }
+  .cta-small:hover { background: var(--baby-blue-deep); }
+  @media (max-width: 560px) { .wordmark { font-size: 1.05rem; } .nav nav a:not(.cta-small) { display: none; } }
+
+  /* CTA */
+  .cta-primary, .cta-dark { background: var(--black); color: var(--white); font-weight: 600; text-decoration: none; padding: 0.85rem 1.6rem; border-radius: 4px; font-size: 0.98rem; display: inline-block; transition: transform 0.15s ease; }
+  .cta-primary:hover, .cta-dark:hover { transform: translateY(-1px); }
+
+  /* SECTIONS */
+  .section { padding: clamp(3rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 3rem); text-align: center; }
+  .section--mist { background: var(--mist); color: var(--ink-white); }
+  .section h1, .section h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 500; text-align: center; }
+  .section-sub { text-align: center; max-width: 50ch; margin: 0.75rem auto 0; opacity: 0.7; font-size: 1rem; }
+  .section--band { background: var(--baby-blue); color: var(--black); display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+
+  /* BUSINESS */
+  .section--business .business-headline { font-size: clamp(1.1rem, 2vw, 1.35rem); font-weight: 600; color: var(--black); margin-top: 0.75rem; }
+  .business-intro { max-width: 62ch; opacity: 0.8; }
+  .business-grid { max-width: 1000px; margin: 2.5rem auto 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; align-items: stretch; text-align: left; }
+  .business-card { background: var(--white); border: 1.5px solid color-mix(in srgb, var(--black) 12%, transparent); border-radius: 8px; padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .business-card h3 { font-size: 1.3rem; font-weight: 500; margin: 0; color: var(--black); }
+  .business-card p { font-size: 0.95rem; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+  .business-card p strong { color: var(--black); }
+  .business-card .business-card-sub { font-weight: 600; color: var(--black); }
+  .business-kicker { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--baby-blue-deep); }
+  .business-custom { max-width: 62ch; margin: 3rem auto 0; display: flex; flex-direction: column; align-items: center; gap: 0.9rem; }
+  .business-custom h3 { font-size: 1.4rem; font-weight: 500; margin: 0; color: var(--black); }
+  .business-custom p { line-height: 1.6; color: var(--ink-white); margin: 0; }
+  .business-closing { font-size: 1.05rem; color: var(--black); }
+  .business-custom .cta-primary { margin-top: 0.5rem; }
+  @media (max-width: 780px) { .business-grid { grid-template-columns: 1fr; } }
+
+  /* FOOTER */
+  .footer { background: var(--black); color: color-mix(in srgb, var(--white) 65%, transparent); padding: 2rem clamp(1.25rem, 6vw, 3rem); display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.75rem; }
+  .footer-row p { font-size: 0.85rem; }
+  .footer-fine { font-family: var(--font-mono); font-size: 0.72rem; opacity: 0.55; }
+  .footer-link { text-decoration: underline; color: inherit; opacity: 0.7; }
+  .footer-link:hover { opacity: 1; }
+  .footer-logo { width: 28px; height: 28px; flex: 0 0 28px; }
+  .footer-logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+</style>

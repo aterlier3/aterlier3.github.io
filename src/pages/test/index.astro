@@ -11,7 +11,7 @@ const principles = [
   },
   {
     title: "ROZWÓJ",
-    body: "Bo każda nowa umiejętność rozwija coś więcej. Pianino uczy koncentracji, pamięci, koordynacji, cierpliwości i systematyczności. Daje Ci przestrzeń, żeby zwolnić, skupić się i zobaczyć własny progres",
+    body: "Bo każda nowa umiejętność rozwija coś więcej. Pianino uczy koncentracji, pamięci, koordynacji, cierpliwości i systematyczności. Daje Ci przestrzeń, żeby zwolnić, skupić się i zobaczyć własny progres.",
   },
   {
     title: "RELACJE",
@@ -98,24 +98,24 @@ const plans = [
   {
     name: "SOLO",
     length: "60 min",
-    price: "99 zł",
-    oldPrice: "150 zł",
+    price: "150 zł",
+    oldPrice: "",
     detail: "Ty, pianino i pełna uwaga prowadzącego. Indywidualne tempo, program dopasowany do Ciebie i przestrzeń na własny rozwój.",
     highlight: false,
   },
   {
     name: "DUO",
     length: "60 min",
-    price: "89 zł / osoba",
-    oldPrice: "140 zł",
+    price: "140 zł",
+    oldPrice: "",
     detail: "Nowa pasja, którą możesz dzielić z kimś bliskim. Przyjdź z drugą połówką, przyjacielem, kimś z rodziny czy znajomym.",
     highlight: false,
   },
   {
     name: "GRUPA",
     length: "60 min",
-    price: "79 zł / osoba",
-    oldPrice: "120 zł",
+    price: "120 zł",
+    oldPrice: "",
     detail: "Muzyka, rozwój i nowe relacje. Kameralne grupy 3–4 osób, wspólna nauka i dobra atmosfera. Grupy tworzone przy zebraniu odpowiedniej liczby osób.",
     highlight: false,
   },
@@ -149,6 +149,7 @@ const practies = [
 ];
 
 // Vouchers: two tiles, each unfolds a panel with options.
+// TODO popraw zdjęcia na voucherach (za bardzo je ucina)
 const vouchers = [
   {
     id: "piano",
@@ -200,11 +201,12 @@ const faqs = [
   {
     q: "Czy muszę od razu kupić pakiet?",
     a: "Nie. Możesz zacząć od pierwszych zajęć w cenie startowej.",
-  },
-  {
-    q: "Do kiedy trwa oferta startowa?",
-    a: "Pierwsze zajęcia w cenie startowej są dostępne do 15 września 2026.",
-  },
+    }
+    // ,
+  // {
+  //   q: "Do kiedy trwa oferta startowa?",
+  //   a: "Pierwsze zajęcia w cenie startowej są dostępne do 15 września 2026.",
+  // },
 ];
 ---
 
@@ -232,7 +234,7 @@ const faqs = [
       <a href="#voucher">Kup voucher</a>
       <a href="#faq">FAQ</a>
       <a href="#location">Znajdź nas</a>
-      <a href="#contact">Dla firm</a>
+      <a href={`${import.meta.env.BASE_URL}test/dla-firm`}>Dla firm</a>
       <a class="cta-small" data-open-inquiry>Umów się na lekcję</a>
     </nav>
   </header>
@@ -350,29 +352,7 @@ const faqs = [
 
       <div class="content-container">
         <section id="section-piano" class="content-section">
-          <section id="pricing" class="section section--white">
-            <h2>OFERTA NA START</h2>
-            <p class="section-sub">Z OKAZJI OTWARCIA CLAIRE ATELIER</p>
-            <div class="plans">
-              {plans.map((plan) => (
-                <div class={`plan ${plan.highlight ? "plan--highlight" : ""}`}>
-                  <p class="plan-length">{plan.length}</p>
-                  <h3>{plan.name}</h3>
-                  <p class="plan-price">
-                    {plan.price}
-                    {plan.oldPrice && <s class="plan-price-old">{plan.oldPrice}</s>}
-                  </p>
-                  <p class="plan-detail">{plan.detail}</p>
-                  <button type="button" class={plan.highlight ? "cta-primary" : "cta-ghost"} data-open-inquiry data-package={plan.name}>
-                    Zarezerwuj pierwsze zajęcia
-                  </button>
-                </div>
-              ))}
-            </div>
-            <p class="offer-note">
-              Oferta na start dotyczy Twoich pierwszych zajęć — ważna do <strong>30 października 2026</strong>.
-            </p>
-
+          <!-- <section id="pricing" class="section section--white"> -->
             <section id="practice" class="section-piano-practice section">
               <h2>CLAIRE PRACTICE</h2>
               <p class="section-sub">
@@ -391,7 +371,7 @@ const faqs = [
                 ))}
               </div>
             </section>
-          </section>
+          <!-- </section> -->
         </section>
 
         <!-- CLAIRE SPEECH -->
@@ -400,8 +380,8 @@ const faqs = [
             <h2>CLAIRE SPEECH</h2>
             <p class="section-sub"><strong>Twój głos. Twoja pewność. Twoja satysfakcja.</strong></p>
             <p class="section-sub">Claire Speech to zajęcia dla dzieci, nastolatków i dorosłych, którzy chcą mówić wyraźniej, swobodniej i z większą pewnością siebie.</p>
-            <p class="section-sub">Nie uczymy „ładnego mówienia”.<br /><br />Uczymy jak mówić tak, żeby inni chcieli Cię słuchać — i żeby Tobie dobrze było ze swoim własnym głosem.</p>
-            <p class="section-sub">Małe grupy do 8–10 osób.<br />1 spotkanie w tygodniu.<br />Miesięczny program.</p>
+            <p class="section-sub">Nie uczymy „ładnego mówienia”.<br /><br />Uczymy jak mówić tak, żeby inni chcieli Cię słuchać — i żeby Twój głos Ci się podobał.</p>
+            <p class="section-sub">Kameralne grupy z indywidualnym podejściem.</p>
             <br />
             <button type="button" class="cta-primary" data-open-inquiry data-package="Pierwsza lekcja">ZAPISZ SIĘ</button>
           </section>
@@ -512,7 +492,7 @@ const faqs = [
       <section class="about">
         <p class="about-lead"><strong>To nie tylko zajęcia przy pianinie.</strong><br />To miejsce, w którym muzyka stanie się pretekstem do spotkań, rozmów i wspólnego spędzania czasu.</p>
         <ul class="school-events"><li>Kameralne koncerty</li><li>Warsztaty</li><li>Spotkania</li><li>Muzyka na żywo</li><li>Wieczory w dobrym towarzystwie</li></ul>
-        <p class="about-lead"><em>Miejsce, w którym możesz nie tylko czerpać, ale też coś od siebie dawać.</em></p>
+        <p class="about-lead"><em>Miejsce, w którym czujesz się jak w domu.</em></p>
       </section>
     </section>
 
@@ -521,12 +501,22 @@ const faqs = [
       <h2 class="accent">POZNAJ KLARĘ</h2>
       <br />
       <p class="hero-sub-white">
-        <b>Pianistka, nauczycielka i doradca finansowy. Łączę trzy światy: muzykę, edukację i finanse.</b> I właśnie to połączenie jest moją siłą. <br /><br />
-        Od blisko <b>9 lat uczę gry na fortepianie. </b> Jestem absolwentką Akademii Muzycznej w Gdańsku, laureatką konkursów pianistycznych w Polsce i za granicą oraz uczestniczką <b>kilkudziesięciu kursów i warsztatów mistrzowskich.</b> Mam również bogate doświadczenie sceniczne – występowałam m.in. w Narodowym Forum Muzyki we Wrocławiu, Filharmonii Bałtyckiej, Radiu Gdańsk, na Zamku Królewskim w Warszawie i w Żelazowej Woli. <br /><br />
-        Przez kilka lat byłam <b>przewodniczącą Międzywydziałowego Koła Muzyki Kameralnej</b> Akademii Muzycznej w Gdańsku, aktywnie angażując się w życie artystyczne i edukacyjne uczelni. <br /><br />
-        W pracy z uczniami stawiam na <b>indywidualne podejście, zaangażowanie i radość z muzyki. </b> Lubię, kiedy nauka ma swój plan, dlatego tworzę indywidualne plany ćwiczeń i proste tabelki, które pomagają ćwiczyć regularnie, świadomie i bez nudy. <br /><br />
-        Jako Doradca Finansowy wiem, że liczby to nie wszystko. <b>Do muzyki podchodzę z planem, a do rozmów o finansach – z człowiekiem po drugiej stronie.</b> Łączenie tych światów nauczyło mnie, że rozwój wymaga pasji, wiedzy, konsekwencji i indywidualnego podejścia. <br /><br />
-        <b>Wierzę, że świat bez muzyki byłby zdecydowanie uboższy, a życie bez pasji i finansowego spokoju – zdecydowanie trudniejsze.</b> <br />Warto inwestować w to, co naprawdę ma dla nas znaczenie. <br />
+        <!-- <b>Pianistka, nauczycielka i doradca finansowy. Łączę trzy światy: muzykę, edukację i finanse.</b> I właśnie to połączenie jest moją siłą. <br /><br /> -->
+        <!-- Od blisko <b>9 lat uczę gry na fortepianie. </b> Jestem absolwentką Akademii Muzycznej w Gdańsku, laureatką konkursów pianistycznych w Polsce i za granicą oraz uczestniczką <b>kilkudziesięciu kursów i warsztatów mistrzowskich.</b> Mam również bogate doświadczenie sceniczne – występowałam m.in. w Narodowym Forum Muzyki we Wrocławiu, Filharmonii Bałtyckiej, Radiu Gdańsk, na Zamku Królewskim w Warszawie i w Żelazowej Woli. <br /><br /> -->
+        <!-- Przez kilka lat byłam <b>przewodniczącą Międzywydziałowego Koła Muzyki Kameralnej</b> Akademii Muzycznej w Gdańsku, aktywnie angażując się w życie artystyczne i edukacyjne uczelni. <br /><br /> -->
+        <!-- W pracy z uczniami stawiam na <b>indywidualne podejście, zaangażowanie i radość z muzyki. </b> Lubię, kiedy nauka ma swój plan, dlatego tworzę indywidualne plany ćwiczeń i proste tabelki, które pomagają ćwiczyć regularnie, świadomie i bez nudy. <br /><br /> -->
+        <!-- Jako Doradca Finansowy wiem, że liczby to nie wszystko. <b>Do muzyki podchodzę z planem, a do rozmów o finansach – z człowiekiem po drugiej stronie.</b> Łączenie tych światów nauczyło mnie, że rozwój wymaga pasji, wiedzy, konsekwencji i indywidualnego podejścia. <br /><br /> -->
+        <!-- <b>Wierzę, że świat bez muzyki byłby zdecydowanie uboższy, a życie bez pasji i finansowego spokoju – zdecydowanie trudniejsze.</b> <br />Warto inwestować w to, co naprawdę ma dla nas znaczenie. <br /> -->
+        <!---->
+        <b>Pianistka, nauczycielka i doradca finansowy. Łączy trzy światy: muzykę, edukację i finanse. </b> I właśnie to połączenie jest jej siłą. <br><br>
+        Od blisko <b>9 lat uczy gry na fortepianie. </b> Jest absolwentką Akademii Muzycznej w Gdańsku, laureatką konkursów pianistycznych w Polsce i za granicą oraz uczestniczką <b>kilkudziesięciu kursów i warsztatów mistrzowski.</b> Ma również bogate doświadczenie sceniczne. Występowała m.in. w Narodowym Forum Muzyki we Wrocławiu, Filharmonii Bałtyckiej, Radiu Gdańsk, na Zamku Królewskim w Warszawie i w Żelazowej Woli. <br><br>
+        Przez kilka lat była przewodniczącą Międzywydziałowego Koła Muzyki Kameralnej Akademii Muzycznej w Gdańsku, aktywnie angażując się w życie artystyczne i edukacyjne uczelni. <br><br>
+        W pracy z uczniami stawia na <b>indywidualne podejście, zaangażowanie i radość z muzyki.</b> Lubi, kiedy nauka ma swój plan, dlatego tworzy indywidualne plany ćwiczeń i proste tabelki, które pomagają uczniom ćwiczyć regularnie, świadomie i bez nudy. <br><br>
+        Jako doradczyni finansowa wie, że liczby to nie wszystko. <b> W nauce muzyki ważny jest dla niej plan, a w rozmowach o finansach najważniejsza jest osoba po drugiej stronie. </b>
+        Łączenie tych światów nauczyło ją, że rozwój wymaga wiedzy, konsekwencji i indywidualnego podejścia. <br><br>
+        <b>Wierzy, że świat bez muzyki byłby zdecydowanie uboższy, a życie bez pasji i finansowego spokoju – zdecydowanie trudniejsze. </b><br>
+        Muzyka daje jej emocje, a finanse pomagają porządkować codzienność. Obie dziedziny uczą ją, że warto inwestować w to, co naprawdę ma dla nas znaczenie. <br><br>
+
       </p>
     </section>
 
@@ -745,7 +735,7 @@ const faqs = [
         <h3>Zarezerwuj termin</h3>
         <p class="inquiry-sub">Wybierz pakiet i zostaw swoje dane — odezwiemy się, żeby ustalić szczegóły.</p>
         <fieldset class="inquiry-field inquiry-radios">
-          <legend>CLAIRE PIANO</legend>
+          <legend>Claire Piano</legend>
           {plans.map((plan) => (
             <label class="inquiry-radio"><input type="radio" name="package" value={plan.name} required />{plan.name} — {plan.length} / {plan.price}{plan.oldPrice && <s class="plan-price-old">{plan.oldPrice}</s>}</label>
           ))}
@@ -811,6 +801,7 @@ const faqs = [
     </div>
     <div class="footer-row">
       <p class="footer-fine">© 2026 Claire Atelier.</p>
+      <a class="footer-fine footer-link" href={`${import.meta.env.BASE_URL}test/dla-firm`}>Dla firm</a>
       <a class="footer-fine footer-link" href="#rodo" data-open-rodo>Polityka prywatności (RODO)</a>
     </div>
   </footer>
@@ -879,7 +870,7 @@ const faqs = [
   .section { padding: clamp(3rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 3rem); text-align: center; }
   .section--black { background: var(--black); color: var(--white); }
   .section--white { background: var(--white); color: var(--ink); }
-  .section--mist { background: var(--mist); color: var(--ink-light); }
+  .section--mist { background: var(--mist); color: var(--ink-white); }
   .section h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 500; text-align: center; }
   .section h2.accent { color: var(--ink-light); }
   .section-sub { text-align: center; max-width: 50ch; margin: 0.75rem auto 0; opacity: 0.7; font-size: 1rem; }
